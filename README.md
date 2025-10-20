@@ -1,16 +1,38 @@
 # DexSandro Frontend
 
-A modern, responsive React.js web application featuring a comprehensive task management system with beautiful UI/UX design.
+A modern, responsive React.js web application featuring a comprehensive task management system with beautiful UI/UX design and enterprise-grade API integration.
 
 ## 🚀 Features
 
 - **Modern React Architecture**: Built with React 18 and functional components with hooks
-- **Task Management System**: Complete CRUD operations for task management
+- **Enterprise API Integration**: RESTful API integration following corporate standards
+- **Task Management System**: Complete CRUD operations with real-time API synchronization
+- **Robust Error Handling**: Comprehensive error handling and user feedback
+- **Loading States**: Visual feedback for all user operations
 - **Responsive Design**: Mobile-first approach that adapts to all screen sizes
 - **Component-Based Structure**: Modular design with reusable components
 - **Modern UI/UX**: Gradient backgrounds, glass morphism, and smooth animations
 - **Auto-Rebuild Development**: Nodemon integration for seamless development workflow
 - **Production Ready**: Optimized build process for deployment
+
+## 📋 API Integration
+
+This application integrates with a RESTful API to manage tasks. See [API_INTEGRATION.md](./API_INTEGRATION.md) for detailed documentation on:
+
+- API configuration and setup
+- Service layer architecture
+- Error handling strategy
+- Custom hooks for state management
+- Best practices implementation
+
+### Quick API Setup
+
+1. Ensure your API server is running on `http://localhost:5135`
+2. The application expects these endpoints:
+   - `GET /api/Tasks` - Get all tasks
+   - `POST /api/Tasks` - Create new task
+   - `PUT /api/Tasks/{id}` - Update task
+   - `DELETE /api/Tasks/{id}` - Delete task
 
 ## 📁 Project Structure
 
