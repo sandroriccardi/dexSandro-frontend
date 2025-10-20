@@ -1,7 +1,11 @@
 import React from 'react';
 import './Footer.css';
+import packageInfo from '../../package.json';
 
 const Footer = () => {
+  const environment = process.env.NODE_ENV || 'development';
+  const buildDate = new Date().toISOString().slice(0, 10);
+  
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -21,12 +25,16 @@ const Footer = () => {
           </div>
           <div className="footer-section">
             <h4>Contact Info</h4>
-            <p>Email: info@dexsandro.com</p>
-            <p>Phone: +1 (555) 123-4567</p>
+            <p>Email: sandroriccardi84@gmail.com</p>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2025 DexSandro. All rights reserved.</p>
+          <div className="footer-bottom-content">
+            <p>&copy; 2025 Sandro. All rights reserved.</p>
+            <p className="version-info" data-env={environment}>
+              {environment.toUpperCase()} | Version {packageInfo.version} | Build {buildDate}
+            </p>
+          </div>
         </div>
       </div>
     </footer>

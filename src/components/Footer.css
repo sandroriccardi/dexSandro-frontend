@@ -62,9 +62,66 @@
   text-align: center;
 }
 
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .footer-bottom p {
   color: #a0aec0;
   margin: 0;
+  font-size: 0.9rem;
+}
+
+.version-info {
+  font-size: 0.8rem !important;
+  color: #718096 !important;
+  font-family: 'Courier New', monospace;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.version-info::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #28a745; /* Default green for production */
+  animation: pulse 2s infinite;
+}
+
+/* Environment-specific indicators */
+.version-info[data-env="development"]::before {
+  background: #ffc107; /* Yellow for development */
+}
+
+.version-info[data-env="test"]::before {
+  background: #17a2b8; /* Blue for test */
+}
+
+.version-info[data-env="staging"]::before {
+  background: #fd7e14; /* Orange for staging */
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Mobile responsive */
@@ -76,5 +133,21 @@
   
   .footer-container {
     padding: 1rem;
+  }
+  
+  .footer-bottom-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .version-info {
+    font-size: 0.75rem !important;
+    justify-content: center;
+  }
+  
+  .version-info::before {
+    width: 6px;
+    height: 6px;
   }
 }
