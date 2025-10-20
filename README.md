@@ -60,6 +60,30 @@ The application uses React Router DOM for client-side navigation:
 
 For detailed navigation system documentation, see [NAVIGATION_README.md](./NAVIGATION_README.md).
 
+## 🧪 Testing
+
+The application includes comprehensive unit tests for all service layer components:
+
+### Test Coverage
+- **TasksApiService**: 85.71% statement coverage with 14 test cases
+- **Complete CRUD Operations**: All API methods tested
+- **Error Handling**: Network and validation error scenarios
+- **Edge Cases**: Data sorting, validation, and boundary conditions
+
+### Running Tests
+```bash
+# Run tests once
+npm test -- --watchAll=false
+
+# Run with coverage report
+npm run test:coverage
+
+# Run in watch mode during development
+npm run test:watch
+```
+
+For detailed testing documentation, see [TESTING_README.md](./TESTING_README.md).
+
 ## 📁 Project Structure
 
 ```
@@ -141,7 +165,10 @@ dexSandro-frontend/
 - **`npm run build:watch`** - Watches for changes and rebuilds automatically using nodemon
 - **`npm run serve`** - Builds and serves the production app on port 3000
 - **`npm run serve:watch`** - Watches for changes, rebuilds, and serves automatically
-- **`npm test`** - Launches the test runner
+- **`npm test`** - Launches the test runner in interactive mode
+- **`npm run test:watch`** - Runs tests in watch mode
+- **`npm run test:coverage`** - Runs tests with coverage report
+- **`npm run test:ci`** - Runs tests for continuous integration
 - **`npm run eject`** - Ejects from Create React App (one-way operation)
 
 ## 🔄 Development Workflow

@@ -10,16 +10,28 @@
     "serve": "npm run build && npx serve -s build -p 3000",
     "serve:watch": "nodemon --watch src --ext js,jsx,css --exec \"npm run serve\"",
     "test": "react-scripts test",
+    "test:watch": "react-scripts test --watchAll",
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
+    "test:ci": "react-scripts test --coverage --watchAll=false --ci",
     "eject": "react-scripts eject"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^7.9.4",
-    "react-scripts": "^5.0.1"
+    "react-router-dom": "^6.26.2",
+    "react-scripts": "^5.1.0-next.26"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "jest-environment-jsdom": "^30.2.0",
     "nodemon": "^3.1.10"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/services/**/*.{js,jsx}",
+      "!src/services/__tests__/**",
+      "!src/services/index.js"
+    ]
   },
   "browserslist": {
     "production": [
