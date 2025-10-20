@@ -32,7 +32,16 @@ class TasksApiService {
    */
   async getAllTasks() {
     try {
-      const tasks = await httpClient.get(this.endpoint);
+      const tasks = await  httpClient.get(this.endpoint);
+      //order tasks by due date desc and then priority desc
+      tasks.sort((a, b) => {
+        const dueDateA = new Date(a.dueDate);
+        const dueDateB = new Date(b.dueDate);
+        if (dueDateB - dueDateA !== 0) {
+          return dueDateB - dueDateA;
+        }
+        return (b.priority || 0) - (a.priority || 0);
+      });
       return tasks || [];
     } catch (error) {
       const errorMessage = handleError(error, { 

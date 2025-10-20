@@ -1,12 +1,14 @@
 # DexSandro Frontend
 
-A modern, responsive React.js web application featuring a comprehensive task management system with beautiful UI/UX design and enterprise-grade API integration.
+A modern, responsive React.js web application featuring a comprehensive task management system with beautiful UI/UX design, enterprise-grade API integration, and client-side routing.
 
 ## 🚀 Features
 
 - **Modern React Architecture**: Built with React 18 and functional components with hooks
+- **Client-Side Routing**: React Router DOM for seamless navigation
 - **Enterprise API Integration**: RESTful API integration following corporate standards
 - **Task Management System**: Complete CRUD operations with real-time API synchronization
+- **Data Table View**: Comprehensive table display of all tasks with sorting and filtering
 - **Robust Error Handling**: Comprehensive error handling and user feedback
 - **Loading States**: Visual feedback for all user operations
 - **Responsive Design**: Mobile-first approach that adapts to all screen sizes
@@ -34,6 +36,30 @@ This application integrates with a RESTful API to manage tasks. See [API_INTEGRA
    - `PUT /api/Tasks/{id}` - Update task
    - `DELETE /api/Tasks/{id}` - Delete task
 
+## 🧭 Navigation & Routing
+
+The application uses React Router DOM for client-side navigation:
+
+### Available Routes
+- **`/`** - Home page with hero section and quick task management
+- **`/all-tasks`** - Comprehensive data table view of all tasks
+
+### Navigation Features
+- **Active Link Highlighting**: Current page is visually indicated in navigation
+- **Seamless Transitions**: No page reloads, smooth SPA experience
+- **URL Management**: Clean, bookmarkable URLs for each section
+- **Mobile Responsive**: Navigation adapts to mobile devices
+
+### Route Components
+```javascript
+<Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/all-tasks" element={<AllTasks />} />
+</Routes>
+```
+
+For detailed navigation system documentation, see [NAVIGATION_README.md](./NAVIGATION_README.md).
+
 ## 📁 Project Structure
 
 ```
@@ -42,20 +68,36 @@ dexSandro-frontend/
 │   └── index.html              # HTML template
 ├── src/
 │   ├── components/
-│   │   ├── Header.js           # Navigation header with sticky positioning
+│   │   ├── Header.js           # Navigation header with routing links
 │   │   ├── Header.css          # Header component styles
+│   │   ├── Home.js             # Home page component
 │   │   ├── Body.js             # Main content container
-│   │   ├── Body.css            # Body component styles  
-│   │   ├── Footer.js           # Site footer with links and info
-│   │   ├── Footer.css          # Footer component styles
+│   │   ├── Body.css            # Body component styles
+│   │   ├── AllTasks.js         # Task table view with API integration
+│   │   ├── AllTasks.css        # AllTasks component styles
 │   │   ├── Tasks.js            # Interactive task management component
-│   │   └── Tasks.css           # Task component styles
-│   ├── App.js                  # Root application component
+│   │   ├── Tasks.css           # Task component styles
+│   │   ├── Footer.js           # Site footer with links and info
+│   │   └── Footer.css          # Footer component styles
+│   ├── services/
+│   │   ├── index.js            # Service exports
+│   │   └── tasksApi.service.js # API service layer
+│   ├── config/
+│   │   └── api.config.js       # API configuration
+│   ├── utils/
+│   │   ├── httpClient.js       # HTTP client utility
+│   │   └── errorHandler.js     # Error handling utility
+│   ├── hooks/
+│   │   ├── index.js            # Hook exports
+│   │   └── useTasks.js         # Custom task management hook
+│   ├── App.js                  # Root application component with routing
 │   ├── App.css                 # Global application styles
 │   └── index.js                # Application entry point
 ├── build/                      # Production build output
 ├── nodemon.json               # Nodemon configuration for auto-rebuild
 ├── package.json               # Dependencies and scripts
+├── API_INTEGRATION.md         # API integration documentation
+├── NAVIGATION_README.md       # Navigation system documentation
 ├── .gitignore                 # Git ignore rules
 └── README.md                  # Project documentation
 ```
@@ -64,6 +106,7 @@ dexSandro-frontend/
 
 - **React 18.2.0** - Modern frontend framework with hooks
 - **React DOM 18.2.0** - DOM rendering and manipulation
+- **React Router DOM** - Client-side routing and navigation
 - **React Scripts 5.0.1** - Build tools and development server
 - **Nodemon 3.1.10** - Auto-restart development tool
 - **CSS3** - Advanced styling (Grid, Flexbox, Gradients, Animations)
@@ -131,15 +174,24 @@ The `nodemon.json` configuration watches:
 
 ### Header Component
 - Responsive navigation bar with company logo
-- Navigation links: Home, About, Services, Contact
+- React Router navigation links: Home, All Tasks, Services, Contact
+- Active link highlighting based on current route
 - Sticky positioning with gradient background
-- Mobile-responsive with collapsible menu
+- Mobile-responsive design
 
-### Body Component
-- Main content area with hero section
+### Home Component
+- Landing page with hero section
 - Welcome message and description
 - "Getting Started" information card
-- Integrated Tasks component
+- Integrated Tasks component for quick task management
+
+### AllTasks Component
+- Comprehensive data table view of all tasks
+- Real-time API data fetching with loading states
+- Responsive table design with priority and status badges
+- Color-coded rows based on task priority
+- Error handling and empty state management
+- Mobile-optimized table scrolling
 
 ### Tasks Component
 - Interactive task management system
@@ -147,7 +199,7 @@ The `nodemon.json` configuration watches:
 - Mark tasks as complete/incomplete
 - Delete tasks functionality
 - Real-time task statistics
-- Local state management with React hooks
+- API integration with error handling
 
 ### Footer Component
 - Company information and branding
@@ -158,14 +210,36 @@ The `nodemon.json` configuration watches:
 
 ## 🎯 Features in Detail
 
+### Navigation System
+- ✅ **Client-Side Routing**: React Router DOM implementation
+- ✅ **Active Link States**: Visual feedback for current page
+- ✅ **Seamless Navigation**: No page reloads between routes
+- ✅ **URL Management**: Clean URLs for each section
+
 ### Task Management System
 - ✅ **Add Tasks**: Input field with "Add Task" button and Enter key support
 - ✅ **Complete Tasks**: Interactive checkboxes to mark completion status
 - ✅ **Delete Tasks**: Remove unwanted tasks with delete button
 - ✅ **Task Statistics**: Real-time display of total, completed, and remaining tasks
 - ✅ **Visual Feedback**: Completed tasks show strikethrough and color changes
-- ✅ **Persistent State**: Tasks remain during the session
+- ✅ **API Integration**: Full CRUD operations with backend synchronization
 - ✅ **Responsive Interface**: Mobile-friendly task management
+
+### Data Table Features
+- 📊 **Comprehensive View**: Display all tasks in organized table format
+- 🏷️ **Status Badges**: Visual indicators for task status (Pending, In Progress, Completed, etc.)
+- 🎯 **Priority Indicators**: Color-coded priority levels (Low, Medium, High, Urgent)
+- 📅 **Date Formatting**: Human-readable creation and due dates
+- 🔄 **Loading States**: Skeleton loading during API calls
+- ❌ **Error Handling**: Graceful error display and recovery
+- 📱 **Mobile Responsive**: Horizontal scrolling for mobile devices
+
+### API Integration Architecture
+- 🏗️ **Service Layer**: Organized API services following enterprise patterns
+- 🔧 **HTTP Client**: Centralized HTTP request handling
+- ⚠️ **Error Handling**: Comprehensive error catching and user feedback
+- 📝 **Type Safety**: JSDoc documentation for better development experience
+- 🔄 **Custom Hooks**: React hooks for state management and API calls
 
 ### User Interface Design
 - 🌈 **Gradient Backgrounds**: Purple-blue color scheme throughout
@@ -176,11 +250,14 @@ The `nodemon.json` configuration watches:
 - ⚡ **Interactive Elements**: Buttons, cards, and links with hover states
 
 ### Component Architecture
-- 🏗️ **Header**: Sticky navigation with logo and menu links
+- 🏗️ **Header**: Sticky navigation with logo and React Router links
+- 🏠 **Home**: Landing page component wrapping Body content
 - 📄 **Body**: Main content area with hero section and task manager
+- 📊 **AllTasks**: Data table component with comprehensive task display
+- 📋 **Tasks**: Interactive task management component
 - 🦶 **Footer**: Company information, links, and contact details
-- 📋 **Tasks**: Standalone task management component
 - 🎯 **Modular Design**: Reusable and maintainable component structure
+- 🔄 **Routing**: React Router integration for SPA navigation
 
 ## 🚀 Production Build
 
@@ -250,11 +327,14 @@ npm start
 
 ## 📊 Project Stats
 
-- **Components**: 4 main components (Header, Body, Footer, Tasks)
-- **CSS Files**: 5 stylesheets with modular design
-- **Build Size**: ~47KB gzipped JavaScript, ~1.6KB CSS
-- **Dependencies**: 3 runtime dependencies, 1 dev dependency
+- **Components**: 6 main components (Header, Home, Body, AllTasks, Tasks, Footer)
+- **CSS Files**: 6 stylesheets with modular design
+- **Routes**: 2 main routes (Home, All Tasks)
+- **Services**: Complete API service layer with error handling
+- **Build Size**: ~62KB gzipped JavaScript, ~2.5KB CSS
+- **Dependencies**: 4 runtime dependencies (including React Router), 1 dev dependency
 - **Responsive**: Mobile-first design with breakpoints
+- **API Integration**: RESTful API with comprehensive error handling
 
 ## 🤝 Contributing
 

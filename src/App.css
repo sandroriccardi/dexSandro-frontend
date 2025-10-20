@@ -17,6 +17,11 @@ body {
   flex-direction: column;
 }
 
+main {
+  flex: 1;
+  min-height: calc(100vh - 120px); /* Adjust based on header and footer height */
+}
+
 /* Global styles */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
