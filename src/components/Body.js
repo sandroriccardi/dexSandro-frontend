@@ -7,7 +7,7 @@ const Body = () => {
     <main className="body">
       <div className="body-container">
         <section className="hero-section">
-          <h1>Welcome to Sandro Frontend</h1>
+          <h1>Welcome</h1>
           {/* <p className="hero-text">
             This is the main body content of our React application. 
             Here you can add any content you want to display on your homepage.

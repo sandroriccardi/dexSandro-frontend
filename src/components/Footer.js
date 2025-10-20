@@ -11,10 +11,10 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3>DexSandro</h3>
+            <h3>Sandro</h3>
             <p>Building amazing web experiences with React.</p>
           </div>
-          <div className="footer-section">
+          {/* <div className="footer-section">
             <h4>Quick Links</h4>
             <ul>
               <li><a href="#home">Home</a></li>
@@ -22,7 +22,7 @@ const Footer = () => {
               <li><a href="#services">Services</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
-          </div>
+          </div> */}
           <div className="footer-section">
             <h4>Contact Info</h4>
             <p>Email: sandroriccardi84@gmail.com</p>
