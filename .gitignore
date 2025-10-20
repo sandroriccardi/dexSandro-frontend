@@ -158,7 +158,7 @@ pids
 *.pid.lock
 
 # Dependency lock files (uncomment if you want to ignore them)
-# package-lock.json
+package-lock.json
 # yarn.lock
 
 # Local development
