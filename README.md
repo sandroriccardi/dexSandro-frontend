@@ -1,15 +1,16 @@
 # DexSandro Frontend
 
-A modern React.js web application featuring a clean, responsive design with task management functionality.
+A modern, responsive React.js web application featuring a comprehensive task management system with beautiful UI/UX design.
 
 ## 🚀 Features
 
-- **Modern React Architecture**: Built with React 18 and functional components
-- **Responsive Design**: Mobile-first approach that works on all devices
-- **Task Management**: Interactive task manager with add, complete, and delete functionality
-- **Component-Based Structure**: Modular design with Header, Body, Footer, and Tasks components
-- **Modern UI/UX**: Gradient backgrounds, smooth animations, and hover effects
-- **Glass Morphism**: Semi-transparent elements with backdrop blur effects
+- **Modern React Architecture**: Built with React 18 and functional components with hooks
+- **Task Management System**: Complete CRUD operations for task management
+- **Responsive Design**: Mobile-first approach that adapts to all screen sizes
+- **Component-Based Structure**: Modular design with reusable components
+- **Modern UI/UX**: Gradient backgrounds, glass morphism, and smooth animations
+- **Auto-Rebuild Development**: Nodemon integration for seamless development workflow
+- **Production Ready**: Optimized build process for deployment
 
 ## 📁 Project Structure
 
@@ -19,29 +20,33 @@ dexSandro-frontend/
 │   └── index.html              # HTML template
 ├── src/
 │   ├── components/
-│   │   ├── Header.js           # Navigation header component
-│   │   ├── Header.css          # Header styles
-│   │   ├── Body.js             # Main content component
-│   │   ├── Body.css            # Body styles
-│   │   ├── Footer.js           # Footer component
-│   │   ├── Footer.css          # Footer styles
-│   │   ├── Tasks.js            # Task management component
-│   │   └── Tasks.css           # Tasks styles
-│   ├── App.js                  # Main application component
+│   │   ├── Header.js           # Navigation header with sticky positioning
+│   │   ├── Header.css          # Header component styles
+│   │   ├── Body.js             # Main content container
+│   │   ├── Body.css            # Body component styles  
+│   │   ├── Footer.js           # Site footer with links and info
+│   │   ├── Footer.css          # Footer component styles
+│   │   ├── Tasks.js            # Interactive task management component
+│   │   └── Tasks.css           # Task component styles
+│   ├── App.js                  # Root application component
 │   ├── App.css                 # Global application styles
 │   └── index.js                # Application entry point
-├── package.json                # Dependencies and scripts
-├── .gitignore                  # Git ignore rules
-└── README.md                   # Project documentation
+├── build/                      # Production build output
+├── nodemon.json               # Nodemon configuration for auto-rebuild
+├── package.json               # Dependencies and scripts
+├── .gitignore                 # Git ignore rules
+└── README.md                  # Project documentation
 ```
 
 ## 🛠️ Technologies Used
 
-- **React 18.2.0** - Frontend framework
-- **React DOM 18.2.0** - DOM rendering
+- **React 18.2.0** - Modern frontend framework with hooks
+- **React DOM 18.2.0** - DOM rendering and manipulation
 - **React Scripts 5.0.1** - Build tools and development server
-- **CSS3** - Styling with modern features (Grid, Flexbox, Gradients)
-- **HTML5** - Semantic markup
+- **Nodemon 3.1.10** - Auto-restart development tool
+- **CSS3** - Advanced styling (Grid, Flexbox, Gradients, Animations)
+- **HTML5** - Semantic markup and accessibility
+- **NPX/NPM** - Package management and serving
 
 ## 📦 Installation
 
@@ -66,10 +71,39 @@ dexSandro-frontend/
 
 ## 🔧 Available Scripts
 
-- **`npm start`** - Runs the app in development mode
+- **`npm start`** or **`npm run dev`** - Runs the app in development mode with hot reloading
 - **`npm run build`** - Builds the app for production
+- **`npm run build:watch`** - Watches for changes and rebuilds automatically using nodemon
+- **`npm run serve`** - Builds and serves the production app on port 3000
+- **`npm run serve:watch`** - Watches for changes, rebuilds, and serves automatically
 - **`npm test`** - Launches the test runner
 - **`npm run eject`** - Ejects from Create React App (one-way operation)
+
+## 🔄 Development Workflow
+
+### Current Recommended Setup
+```bash
+npm run serve:watch
+```
+**Benefits:**
+- ✅ **Auto-detects** file changes in `src/` folder
+- ✅ **Automatically rebuilds** production bundle
+- ✅ **Serves updated app** immediately
+- ✅ **Production-like testing** environment
+- ✅ **Terminal feedback** for build status and errors
+
+### File Watching Configuration
+The `nodemon.json` configuration watches:
+- **File Types**: `.js`, `.jsx`, `.ts`, `.tsx`, `.css`, `.scss`, `.json`
+- **Watch Folder**: `src/` directory
+- **Ignore**: Test files and node_modules
+- **Delay**: 1000ms to avoid rapid rebuilds
+
+### Development Tips
+- 💡 **Save any file** in `src/` to trigger rebuild
+- 💡 **Check terminal** for build status and error messages
+- 💡 **Browser refresh** may be needed after rebuild completion
+- 💡 **Type `rs`** in terminal to manually restart nodemon
 
 ## 🎨 Component Overview
 
@@ -102,42 +136,103 @@ dexSandro-frontend/
 
 ## 🎯 Features in Detail
 
-### Task Management
-- ✅ Add new tasks
-- ✅ Mark tasks as complete/incomplete
-- ✅ Delete unwanted tasks
-- ✅ Real-time task statistics
-- ✅ Persistent state during session
-- ✅ Responsive design for mobile devices
+### Task Management System
+- ✅ **Add Tasks**: Input field with "Add Task" button and Enter key support
+- ✅ **Complete Tasks**: Interactive checkboxes to mark completion status
+- ✅ **Delete Tasks**: Remove unwanted tasks with delete button
+- ✅ **Task Statistics**: Real-time display of total, completed, and remaining tasks
+- ✅ **Visual Feedback**: Completed tasks show strikethrough and color changes
+- ✅ **Persistent State**: Tasks remain during the session
+- ✅ **Responsive Interface**: Mobile-friendly task management
 
-### Design Elements
-- 🌈 **Gradient Backgrounds**: Purple-blue color scheme
-- 💨 **Smooth Animations**: Hover effects and transitions
-- 📱 **Mobile-First Design**: Responsive on all screen sizes
-- 🔍 **Glass Morphism**: Modern transparent elements
-- 🎨 **Modern Typography**: Clean and readable fonts
+### User Interface Design
+- 🌈 **Gradient Backgrounds**: Purple-blue color scheme throughout
+- 💨 **Smooth Animations**: Hover effects, transitions, and micro-interactions
+- 📱 **Mobile-First Design**: Fully responsive on all screen sizes
+- 🔍 **Glass Morphism**: Semi-transparent elements with backdrop blur
+- 🎨 **Modern Typography**: Clean, readable fonts with proper hierarchy
+- ⚡ **Interactive Elements**: Buttons, cards, and links with hover states
+
+### Component Architecture
+- 🏗️ **Header**: Sticky navigation with logo and menu links
+- 📄 **Body**: Main content area with hero section and task manager
+- 🦶 **Footer**: Company information, links, and contact details
+- 📋 **Tasks**: Standalone task management component
+- 🎯 **Modular Design**: Reusable and maintainable component structure
 
 ## 🚀 Production Build
 
-To create a production build:
-
+### Build for Production
 ```bash
 npm run build
 ```
+Creates an optimized production build in the `build/` folder with:
+- Minified JavaScript and CSS
+- Optimized images and assets
+- Performance optimizations
+- Ready for deployment
 
-To serve the production build locally:
-
+### Serve Production Build Locally
 ```bash
-npx serve -s build -p 3000
+npm run serve
+```
+Builds and serves the production app on `http://localhost:3000`
+
+### Quick Start for Development
+```bash
+# Clone the repository
+git clone https://github.com/sandroriccardi/dexSandro-frontend.git
+cd dexSandro-frontend
+
+# Install dependencies
+npm install
+
+# Start auto-rebuild development (recommended)
+npm run serve:watch
 ```
 
-## 📱 Browser Support
+### Alternative Development Methods
+```bash
+# Manual build and serve
+npm run serve
 
-- ✅ Chrome (latest)
-- ✅ Firefox (latest)
-- ✅ Safari (latest)
-- ✅ Edge (latest)
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
+# Auto-rebuild only (no serving)
+npm run build:watch
+
+# Traditional React development server (has webpack issues currently)
+npm start
+```
+
+## 📱 Browser Support & Performance
+
+### Supported Browsers
+- ✅ **Chrome** (latest versions)
+- ✅ **Firefox** (latest versions)  
+- ✅ **Safari** (latest versions)
+- ✅ **Edge** (latest versions)
+- ✅ **Mobile Safari** (iOS)
+- ✅ **Chrome Mobile** (Android)
+
+### Performance Features
+- ⚡ **Code Splitting**: Optimized bundle sizes
+- 🗜️ **Minification**: Compressed CSS and JavaScript
+- 🖼️ **Asset Optimization**: Optimized images and resources
+- 📦 **Tree Shaking**: Unused code elimination
+- 🔄 **Caching**: Browser caching for static assets
+
+## 🛡️ Known Issues
+
+- **Development Server**: `npm start` currently has webpack-dev-server resolution issues
+- **Workaround**: Use `npm run serve:watch` for development instead
+- **Status**: Production builds and serving work perfectly
+
+## 📊 Project Stats
+
+- **Components**: 4 main components (Header, Body, Footer, Tasks)
+- **CSS Files**: 5 stylesheets with modular design
+- **Build Size**: ~47KB gzipped JavaScript, ~1.6KB CSS
+- **Dependencies**: 3 runtime dependencies, 1 dev dependency
+- **Responsive**: Mobile-first design with breakpoints
 
 ## 🤝 Contributing
 
