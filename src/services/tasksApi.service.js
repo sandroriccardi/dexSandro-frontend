@@ -84,10 +84,11 @@ class TasksApiService {
       if (!taskData.text || taskData.text.trim() === '') {
         throw new Error('Task text is required');
       }
-
       const newTask = {
-        text: taskData.text.trim(),
-        completed: taskData.completed || false
+        title: taskData.title || API_CONFIG.DEFAULTS.TASK_TITLE,
+        description: taskData.text.trim(),
+        isCompleted: false,
+        dueDate: new Date(Date.now() + API_CONFIG.DEFAULTS.DUE_DATE_OFFSET_MS).toISOString()
       };
 
       const createdTask = await httpClient.post(this.endpoint, newTask);

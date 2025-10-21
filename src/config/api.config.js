@@ -20,6 +20,11 @@ const API_CONFIG = {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   },
+
+  DEFAULTS: {
+    TASK_TITLE: 'New Task',
+    DUE_DATE_OFFSET_MS: 24 * 60 * 60 * 1000, // 24 hours
+  },
   
   // HTTP status codes
   STATUS_CODES: {
