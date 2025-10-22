@@ -89,7 +89,9 @@ class TasksApiService {
         description: taskData.text.trim(),
         isCompleted: false,
         dueDate: new Date(Date.now() + API_CONFIG.DEFAULTS.DUE_DATE_OFFSET_MS).toISOString(),
-        priority: taskData.priority || API_CONFIG.DEFAULTS.TASK_PRIORITY
+        priority: parseInt(taskData.priority) || API_CONFIG.DEFAULTS.TASK_PRIORITY,
+        createdAt: new Date().toISOString(),
+        completedAt: null
       };
 
       const createdTask = await httpClient.post(this.endpoint, newTask);
