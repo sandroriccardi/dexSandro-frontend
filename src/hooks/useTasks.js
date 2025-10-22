@@ -84,7 +84,9 @@ export const useTasks = () => {
       setError(null);
       
       // Generate title using ChatGPT
-      const generatedTitle = await generateTaskTitle(text.trim());
+      let generatedTitle = await generateTaskTitle(text.trim());
+      //remove start and end quote from generatedTitle
+      generatedTitle = generatedTitle.replace(/^"(.*)"$/, '$1');
       
       const newTask = await tasksApiService.createTask({ 
         text: text.trim(),
@@ -99,7 +101,7 @@ export const useTasks = () => {
     } finally {
       setLoading(LOADING_STATES.IDLE);
     }
-  }, []);
+  }, [generateTaskTitle]);
 
   /**
    * Toggle task completion status
