@@ -73,7 +73,7 @@ const Tasks = () => {
           onChange={(e) => setNewTask(e.target.value)}
           placeholder="Enter a new task..."
           className="task-input"
-          onKeyPress={(e) => e.key === 'Enter' && handleAddTask()}
+          // onKeyPress={(e) => e.key === 'Enter' && handleAddTask()}
           disabled={isCreating}
         />
         <button 

@@ -140,14 +140,14 @@ class TasksApiService {
    * @returns {Promise<Task>} - Updated task object
    * @throws {Error} - When API call fails
    */
-  async toggleTask(taskId, completed) {
+  async toggleTask(taskId, isCompleted) {
     try {
-      return await this.updateTask(taskId, { completed });
+      return await this.updateTask(taskId, { isCompleted });
     } catch (error) {
       const errorMessage = handleError(error, { 
         operation: 'toggleTask',
         taskId,
-        completed,
+        isCompleted,
         endpoint: this.endpoint 
       });
       throw new Error(errorMessage);

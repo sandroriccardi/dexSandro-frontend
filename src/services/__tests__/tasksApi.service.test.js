@@ -144,14 +144,14 @@ describe('TasksApiService', () => {
   describe('toggleTask', () => {
     it('should toggle task completion status', async () => {
       const taskId = 1;
-      const completed = true;
-      const mockUpdatedTask = { id: taskId, text: 'Test Task', completed };
+      const isCompleted = true;
+      const mockUpdatedTask = { id: taskId, text: 'Test Task', isCompleted };
       
       mockedHttpClient.put.mockResolvedValue(mockUpdatedTask);
 
-      const result = await tasksApiService.toggleTask(taskId, completed);
+      const result = await tasksApiService.toggleTask(taskId, isCompleted);
 
-      expect(mockedHttpClient.put).toHaveBeenCalledWith('/api/Tasks/1', { completed });
+      expect(mockedHttpClient.put).toHaveBeenCalledWith('/api/Tasks/1', { isCompleted });
       expect(result).toEqual(mockUpdatedTask);
     });
   });
