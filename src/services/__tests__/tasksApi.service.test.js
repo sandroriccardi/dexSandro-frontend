@@ -13,6 +13,11 @@ jest.mock('../../utils/errorHandler');
 jest.mock('../../config/api.config', () => ({
   ENDPOINTS: {
     TASKS: '/api/Tasks'
+  },
+  DEFAULTS: {
+    TASK_TITLE: 'New Task',
+    DUE_DATE_OFFSET_MS: 24 * 60 * 60 * 1000, // 24 hours
+    TASK_PRIORITY: 3
   }
 }));
 
@@ -77,20 +82,37 @@ describe('TasksApiService', () => {
 
       const result = await tasksApiService.createTask(taskData);
 
-      expect(mockedHttpClient.post).toHaveBeenCalledWith('/api/Tasks', taskData);
+      // Verify the transformed payload sent to the API
+      expect(mockedHttpClient.post).toHaveBeenCalledWith('/api/Tasks', expect.objectContaining({
+        title: 'New Task',
+        description: 'New Task',
+        isCompleted: false,
+        priority: 3,
+        createdAt: expect.any(String),
+        dueDate: expect.any(String),
+        completedAt: null
+      }));
       expect(result).toEqual(mockCreatedTask);
     });
 
     it('should trim whitespace from task text', async () => {
       const taskData = { text: '  Spaced Task  ', completed: false };
-      const expectedPayload = { text: 'Spaced Task', completed: false };
-      const mockCreatedTask = { id: 1, ...expectedPayload };
+      const mockCreatedTask = { id: 1, text: 'Spaced Task', completed: false };
       
       mockedHttpClient.post.mockResolvedValue(mockCreatedTask);
 
       await tasksApiService.createTask(taskData);
 
-      expect(mockedHttpClient.post).toHaveBeenCalledWith('/api/Tasks', expectedPayload);
+      // Verify the transformed payload with trimmed text sent to the API
+      expect(mockedHttpClient.post).toHaveBeenCalledWith('/api/Tasks', expect.objectContaining({
+        title: 'New Task',
+        description: 'Spaced Task',
+        isCompleted: false,
+        priority: 3,
+        createdAt: expect.any(String),
+        dueDate: expect.any(String),
+        completedAt: null
+      }));
     });
 
     it('should validate empty task text', async () => {
