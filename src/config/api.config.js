@@ -24,6 +24,7 @@ const API_CONFIG = {
   DEFAULTS: {
     TASK_TITLE: 'New Task',
     DUE_DATE_OFFSET_MS: 24 * 60 * 60 * 1000, // 24 hours
+    TASK_PRIORITY: 3
   },
   
   // HTTP status codes

@@ -113,7 +113,7 @@ const Tasks = () => {
                   className="task-checkbox"
                   disabled={loading === 'updating'}
                 />
-                <span className="task-text">{task.description}</span>
+                <span className="task-text">{task.title}</span>
               </div>
               {/* <button
                 onClick={() => handleDeleteTask(task.id)}

@@ -1,11 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { tasksApiService } from '../services';
+import AddTaskModal from './AddTaskModal';
 import './AllTasks.css';
 
 const AllTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDelete = async (taskId) => {
+    try {
+      await tasksApiService.deleteTask(taskId);
+      setTasks(tasks.filter((task) => task.id !== taskId));
+    } catch (err) {
+      setError('Failed to delete task');
+      console.error('Error deleting task:', err);
+    }
+  };
+
+  const handleAddTask = async (taskData) => {
+    try {
+      const newTask = await tasksApiService.createTask(taskData);
+      setTasks([newTask, ...tasks]);
+      setIsModalOpen(false);
+    } catch (err) {
+      setError('Failed to add task');
+      console.error('Error adding task:', err);
+    }
+  };
 
   useEffect(() => {
     const fetchAllTasks = async () => {
@@ -55,24 +78,25 @@ const AllTasks = () => {
         <div className="tasks-table-container">
           <table className="tasks-table">
             <thead>
-              <tr>
+              <tr className= "tasks-table-container-header">
                 {/* <th>ID</th> */}
-                <th>Title</th>
-                <th>Description</th>
-                <th>Completed</th>
-                <th>Priority</th>
-                <th>Created Date</th>
-                <th>Due Date</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Completed</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               {tasks.map((task) => (
-                <tr key={task.id} className={`task-row priority-${task.priority ? task.priority.toString().toLowerCase() : 'none'}`}>
+                <tr key={task.id} className={`task-row priority-${task.priority ? task.priority.toString().toLowerCase() : 'none'}`} >
                   {/* <td>{task.id}</td> */}
                   <td className="task-title">{task.title || 'No title'}</td>
                   <td className="task-description">{task.description || 'No description'}</td>
                   <td>
-                    <span className={`status-badge status-${task.isCompleted ? task.isCompleted.toString().toLowerCase() : 'unknown'}`}>
+                    <span className={`status-badge status-${task.isCompleted ? 'completed' : 'not-completed'}`}>
                       {task.isCompleted ? 'Completed' : 'Not Completed'}
                     </span>
                   </td>
@@ -83,12 +107,25 @@ const AllTasks = () => {
                   </td>
                   <td>{task.createdAt ? new Date(task.createdAt).toLocaleDateString() : 'N/A'}</td>
                   <td>{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'N/A'}</td>
+                  <td>
+                    <button onClick={() => handleDelete(task.id)} className="status-badge status-danger">
+                      <span role="img" aria-label="delete" style={{ color: 'red' }}>Delete</span>
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       )}
+       <div className="add-task-container">
+        <button onClick={() => setIsModalOpen(true)} className="status-badge status-primary">Add Task</button>
+      </div>
+      <AddTaskModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAddTask={handleAddTask}
+      />
     </div>
   );
 };
