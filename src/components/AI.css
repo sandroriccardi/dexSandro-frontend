@@ -1,0 +1,154 @@
+.ai-page {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ai-page h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.ai-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-section label {
+  font-weight: bold;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.input-section textarea {
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color 0.3s ease;
+}
+
+.input-section textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.submit-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  align-self: flex-start;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.submit-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.output-section {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.output-section h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.text-output {
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  min-height: 120px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.text-output:empty::before {
+  content: "Your text will appear here as you type...";
+  color: #999;
+  font-style: italic;
+}
+
+.summary-section {
+  background-color: #e8f5e8;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #c3e6cb;
+  margin-top: 1rem;
+}
+
+.summary-section h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #155724;
+  font-size: 1.2rem;
+}
+
+.summary-output {
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #c3e6cb;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #333;
+  text-align: center;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .ai-page {
+    padding: 1rem;
+  }
+  
+  .input-section textarea {
+    min-height: 100px;
+  }
+  
+  .text-output {
+    min-height: 100px;
+  }
+}

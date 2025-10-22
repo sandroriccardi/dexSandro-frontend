@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './AddTaskModal.css';
+import openAIService from '../services/openai.service.js';
 
 const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
   const [title, setTitle] = useState('');
@@ -7,6 +8,29 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
   const [dueDate, setDueDate] = useState('');
   const [priority, setPriority] = useState();
   const [validationError, setValidationError] = useState('');
+  const [isGeneratingTitle, setIsGeneratingTitle] = useState(false);
+
+  const generateTaskTitle = async () => {
+    if (!description.trim()) {
+      setValidationError('Please enter a description first to generate a title');
+      return;
+    }
+
+    setIsGeneratingTitle(true);
+    try {
+      const generatedTitle = await openAIService.generateTaskTitle(description);
+      setTitle(generatedTitle);
+      setValidationError(''); // Clear any previous errors
+    } catch (error) {
+      console.error('Error generating title:', error);
+      // Fallback: Create a simple title suggestion
+      const words = description.trim().split(' ');
+      const firstFewWords = words.slice(0, 4).join(' ');
+      setTitle(`${firstFewWords}${words.length > 4 ? '...' : ''}`);
+    } finally {
+      setIsGeneratingTitle(false);
+    }
+  };
 
   const handleClose = () => {
     setTitle('');
@@ -14,6 +38,7 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
     setDueDate('');
     setPriority('');
     setValidationError('');
+    setIsGeneratingTitle(false);
     onClose();
   };
 
@@ -57,13 +82,24 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
+            <div className="title-input-group">
+              <input
+                type="text"
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                onClick={generateTaskTitle}
+                className="ai-generate-button"
+                disabled={isGeneratingTitle || !description.trim()}
+                title="Generate title based on description"
+              >
+                {isGeneratingTitle ? 'Generating...' : '🤖 AI Title'}
+              </button>
+            </div>
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>

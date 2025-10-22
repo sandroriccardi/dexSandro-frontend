@@ -29,6 +29,14 @@ const Header = () => {
                 All Tasks
               </Link>
             </li>
+            <li>
+              <Link 
+                to="/ai" 
+                className={`nav-link ${location.pathname === '/ai' ? 'active' : ''}`}
+              >
+                AI
+              </Link>
+            </li>
             <li><a href="#services" className="nav-link">Services</a></li>
             <li><a href="#contact" className="nav-link">Contact</a></li>
           </ul>

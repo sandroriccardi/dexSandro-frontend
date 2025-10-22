@@ -4,6 +4,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import tasksApiService from '../services/tasksApi.service.js';
+import openAIService from '../services/openai.service.js';
 
 /**
  * Loading states for different operations
@@ -51,8 +52,25 @@ export const useTasks = () => {
   }, []);
 
   /**
+   * Generate task title using ChatGPT
+   * @param {string} text - Task description
+   * @returns {Promise<string>} - Generated title
+   */
+  const generateTaskTitle = useCallback(async (text) => {
+    try {
+      return await openAIService.generateTaskTitle(text);
+    } catch (error) {
+      console.warn('Failed to generate AI title, using fallback:', error);
+      // Fallback: Create a simple title suggestion
+      const words = text.trim().split(' ');
+      const firstFewWords = words.slice(0, 4).join(' ');
+      return `${firstFewWords}${words.length > 4 ? '...' : ''}`;
+    }
+  }, []);
+
+  /**
    * Add a new task
-   * @param {string} text - Task text
+   * @param {string} text - Task text/description
    * @returns {Promise<boolean>} - Success status
    */
   const addTask = useCallback(async (text) => {
@@ -65,7 +83,13 @@ export const useTasks = () => {
       setLoading(LOADING_STATES.CREATING);
       setError(null);
       
-      const newTask = await tasksApiService.createTask({ text: text.trim() });
+      // Generate title using ChatGPT
+      const generatedTitle = await generateTaskTitle(text.trim());
+      
+      const newTask = await tasksApiService.createTask({ 
+        text: text.trim(),
+        title: generatedTitle
+      });
       setTasks(prevTasks => [...prevTasks, newTask]);
       return true;
     } catch (err) {

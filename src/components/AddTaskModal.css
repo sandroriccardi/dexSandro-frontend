@@ -39,6 +39,37 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+
+  .title-input-group {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .title-input-group input {
+    flex: 1;
+  }
+
+  .ai-generate-button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-generate-button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+
+  .ai-generate-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
   
   .form-actions {
     display: flex;
