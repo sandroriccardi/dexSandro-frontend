@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { tasksApiService } from '../services';
 import AddTaskModal from './AddTaskModal';
+import ConfirmModal from './ConfirmModal';
+import Toast from './Toast';
 import './AllTasks.css';
 
 const AllTasks = () => {
@@ -8,15 +10,41 @@ const AllTasks = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState(null);
+  const [toast, setToast] = useState({ isVisible: false, message: '', type: 'info' });
 
-  const handleDelete = async (taskId) => {
-    try {
-      await tasksApiService.deleteTask(taskId);
-      setTasks(tasks.filter((task) => task.id !== taskId));
-    } catch (err) {
-      setError('Failed to delete task');
-      console.error('Error deleting task:', err);
+  const showToast = (message, type = 'info') => {
+    setToast({ isVisible: true, message, type });
+  };
+
+  const hideToast = () => {
+    setToast({ ...toast, isVisible: false });
+  };
+
+  const handleDeleteClick = (taskId) => {
+    setTaskToDelete(taskId);
+    setIsConfirmModalOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (taskToDelete) {
+      try {
+        await tasksApiService.deleteTask(taskToDelete);
+        setTasks(tasks.filter((task) => task.id !== taskToDelete));
+        showToast('Task deleted successfully', 'success');
+      } catch (err) {
+        showToast('Failed to delete task', 'error');
+        console.error('Error deleting task:', err);
+      }
     }
+    setIsConfirmModalOpen(false);
+    setTaskToDelete(null);
+  };
+
+  const handleCancelDelete = () => {
+    setIsConfirmModalOpen(false);
+    setTaskToDelete(null);
   };
 
   const handleAddTask = async (taskData) => {
@@ -24,8 +52,9 @@ const AllTasks = () => {
       const newTask = await tasksApiService.createTask(taskData);
       setTasks([newTask, ...tasks]);
       setIsModalOpen(false);
+      showToast('Task added successfully', 'success');
     } catch (err) {
-      setError('Failed to add task');
+      showToast('Failed to add task', 'error');
       console.error('Error adding task:', err);
     }
   };
@@ -38,6 +67,7 @@ const AllTasks = () => {
         setTasks(data);
       } catch (err) {
         setError('Failed to fetch tasks');
+        showToast('Failed to fetch tasks', 'error');
         console.error('Error fetching tasks:', err);
       } finally {
         setLoading(false);
@@ -108,7 +138,7 @@ const AllTasks = () => {
                   <td>{task.createdAt ? new Date(task.createdAt).toLocaleDateString() : 'N/A'}</td>
                   <td>{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'N/A'}</td>
                   <td>
-                    <button onClick={() => handleDelete(task.id)} className="status-badge status-danger">
+                    <button onClick={() => handleDeleteClick(task.id)} className="status-badge status-danger">
                       <span role="img" aria-label="delete" style={{ color: 'red' }}>Delete</span>
                     </button>
                   </td>
@@ -125,6 +155,18 @@ const AllTasks = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onAddTask={handleAddTask}
+      />
+      <ConfirmModal
+        isOpen={isConfirmModalOpen}
+        onClose={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+        message="Are you sure you want to delete this task?"
+      />
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        isVisible={toast.isVisible}
+        onClose={hideToast}
       />
     </div>
   );

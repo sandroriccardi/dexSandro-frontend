@@ -6,19 +6,39 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [priority, setPriority] = useState();
+  const [validationError, setValidationError] = useState('');
+
+  const handleClose = () => {
+    setTitle('');
+    setDescription('');
+    setDueDate('');
+    setPriority('');
+    setValidationError('');
+    onClose();
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setValidationError('');
+    
     if (!title || !description || !dueDate) {
-      alert('Please fill all fields');
+      setValidationError('Please fill all required fields');
       return;
     }
+    
     onAddTask({
       title,
       text: description,
       dueDate,
       priority
     });
+    
+    // Reset form
+    setTitle('');
+    setDescription('');
+    setDueDate('');
+    setPriority('');
+    setValidationError('');
   };
 
   if (!isOpen) {
@@ -29,6 +49,11 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <h2>Add New Task</h2>
+        {validationError && (
+          <div className="validation-error">
+            {validationError}
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="title">Title</label>
@@ -71,7 +96,7 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
           </div>
           <div className="form-actions">
             <button type="submit" className="save-button">Save</button>
-            <button type="button" onClick={onClose} className="cancel-button">Cancel</button>
+            <button type="button" onClick={handleClose} className="cancel-button">Cancel</button>
           </div>
         </form>
       </div>
