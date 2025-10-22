@@ -79,7 +79,7 @@ const AllTasks = () => {
 
   if (loading) {
     return (
-      <div className="all-tasks-container">
+      <div className="all-tasks-container" data-testid="loading-container">
         <div className="loading">Loading tasks...</div>
       </div>
     );
