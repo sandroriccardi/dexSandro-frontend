@@ -35,7 +35,10 @@ describe('useTasks Hook - addTask', () => {
         createdAt: new Date().toISOString()
       };
 
-      mockedOpenAIService.generateTaskTitle.mockResolvedValue(generatedTitle);
+      mockedOpenAIService.generateTaskTitle.mockResolvedValue({
+        success: true,
+        title: generatedTitle
+      });
       mockedTasksApiService.createTask.mockResolvedValue(mockCreatedTask);
 
       const { result } = renderHook(() => useTasks());
@@ -74,7 +77,7 @@ describe('useTasks Hook - addTask', () => {
         isCompleted: false
       };
 
-      mockedOpenAIService.generateTaskTitle.mockResolvedValue(quotedTitle);
+      mockedOpenAIService.generateTaskTitle.mockResolvedValue({ success: true, title: quotedTitle });
       mockedTasksApiService.createTask.mockResolvedValue(mockCreatedTask);
 
       const { result } = renderHook(() => useTasks());
@@ -108,7 +111,7 @@ describe('useTasks Hook - addTask', () => {
         isCompleted: false
       };
 
-      mockedOpenAIService.generateTaskTitle.mockResolvedValue(quotedTitle);
+      mockedOpenAIService.generateTaskTitle.mockResolvedValue({ success: true, title: quotedTitle });
       mockedTasksApiService.createTask.mockResolvedValue(mockCreatedTask);
 
       const { result } = renderHook(() => useTasks());
@@ -214,7 +217,7 @@ describe('useTasks Hook - addTask', () => {
       const generatedTitle = 'Generated Title';
       const apiError = new Error('API service error');
 
-      mockedOpenAIService.generateTaskTitle.mockResolvedValue(generatedTitle);
+      mockedOpenAIService.generateTaskTitle.mockResolvedValue({ success: true, title: generatedTitle });
       mockedTasksApiService.createTask.mockRejectedValue(apiError);
 
       const { result } = renderHook(() => useTasks());
@@ -253,7 +256,7 @@ describe('useTasks Hook - addTask', () => {
         isCompleted: false
       };
 
-      mockedOpenAIService.generateTaskTitle.mockResolvedValue(generatedTitle);
+      mockedOpenAIService.generateTaskTitle.mockResolvedValue({ success: true, title: generatedTitle });
       mockedTasksApiService.createTask.mockResolvedValue(mockCreatedTask);
 
       const { result } = renderHook(() => useTasks());
@@ -287,7 +290,7 @@ describe('useTasks Hook - addTask', () => {
         resolveCreate = resolve;
       });
 
-      mockedOpenAIService.generateTaskTitle.mockResolvedValue(generatedTitle);
+      mockedOpenAIService.generateTaskTitle.mockResolvedValue({ success: true, title: generatedTitle });
       mockedTasksApiService.createTask.mockReturnValue(createPromise);
 
       const { result } = renderHook(() => useTasks());
@@ -339,7 +342,7 @@ describe('useTasks Hook - addTask', () => {
       const newTask = { id: 3, title: generatedTitle, text: newTaskText, isCompleted: false };
 
       mockedTasksApiService.getAllTasks.mockResolvedValue(existingTasks);
-      mockedOpenAIService.generateTaskTitle.mockResolvedValue(generatedTitle);
+      mockedOpenAIService.generateTaskTitle.mockResolvedValue({ success: true, title: generatedTitle });
       mockedTasksApiService.createTask.mockResolvedValue(newTask);
 
       const { result } = renderHook(() => useTasks());

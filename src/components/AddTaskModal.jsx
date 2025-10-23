@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './AddTaskModal.css';
-import openAIService from '../services/openai.service.js';
+import openAIService from '../services/openai.service';
 
 const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
   const [title, setTitle] = useState('');
@@ -18,11 +18,29 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
 
     setIsGeneratingTitle(true);
     try {
-      const generatedTitle = await openAIService.generateTaskTitle(description);
-      setTitle(generatedTitle);
-      setValidationError(''); // Clear any previous errors
+      const result = await openAIService.generateTaskTitle(description);
+      
+      if (result.success) {
+        setTitle(result.title);
+        setValidationError(''); // Clear any previous errors
+        
+        // Show warning if there's one (you could add a toast here too if needed)
+        if (result.warning) {
+          console.warn('OpenAI Warning:', result.warning.message);
+        }
+      } else {
+        console.error('Error generating title:', result.error);
+        setValidationError(`AI Error: ${result.error?.message || 'Failed to generate title'}`);
+        
+        // Fallback: Create a simple title suggestion
+        const words = description.trim().split(' ');
+        const firstFewWords = words.slice(0, 4).join(' ');
+        setTitle(`${firstFewWords}${words.length > 4 ? '...' : ''}`);
+      }
     } catch (error) {
-      console.error('Error generating title:', error);
+      console.error('Unexpected error generating title:', error);
+      setValidationError('An unexpected error occurred while generating title');
+      
       // Fallback: Create a simple title suggestion
       const words = description.trim().split(' ');
       const firstFewWords = words.slice(0, 4).join(' ');

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Tasks.css';
-import { useTasks } from '../hooks/useTasks.js';
+import { useTasks } from '../hooks/useTasks';
 
 const Tasks = () => {
   const {

@@ -3,7 +3,7 @@
  * Centralizes all custom hooks exports
  */
 
-export { useTasks } from './useTasks.js';
+export { useTasks } from './useTasks';
 
 // Future hooks can be exported here
 // export { useAuth } from './useAuth.js';

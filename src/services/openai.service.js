@@ -49,10 +49,24 @@ class OpenAIService {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error?.message || `OpenAI API error: ${response.status}`);
+        const errorMessage = errorData.error?.message || `OpenAI API error: ${response.status}`;
+        const errorType = response.status >= 500 ? 'error' : 'warning';
+        throw new Error(JSON.stringify({ 
+          message: errorMessage, 
+          type: errorType, 
+          status: response.status,
+          code: errorData.error?.code 
+        }));
       }
 
-      return await response.json();
+      const responseData = await response.json();
+      
+      // Check for warnings in the response
+      if (responseData.warning) {
+        console.warn('OpenAI API Warning:', responseData.warning);
+      }
+
+      return responseData;
     } catch (error) {
       clearTimeout(timeoutId);
       if (error.name === 'AbortError') {
@@ -66,7 +80,7 @@ class OpenAIService {
    * Generate title using ChatGPT
    * @param {string} text - Input text
    * @param {object} options - Generation options
-   * @returns {Promise<string>} - Generated title
+   * @returns {Promise<object>} - Generated title with metadata
    */
   async generateTitle(text, options = {}) {
     const {
@@ -89,17 +103,46 @@ class OpenAIService {
         temperature
       });
 
-      return data.choices[0].message.content.trim();
+      const result = {
+        title: data.choices[0].message.content.trim(),
+        success: true
+      };
+
+      // Check for any warnings or usage information
+      if (data.usage && data.usage.total_tokens > (maxTokens * 0.8)) {
+        result.warning = {
+          message: 'Response is approaching token limit',
+          type: 'warning'
+        };
+      }
+
+      return result;
     } catch (error) {
       console.warn('Failed to generate AI title:', error);
-      throw error;
+      
+      // Try to parse structured error
+      let parsedError;
+      try {
+        parsedError = JSON.parse(error.message);
+      } catch {
+        parsedError = { 
+          message: error.message, 
+          type: 'error' 
+        };
+      }
+
+      return {
+        title: null,
+        success: false,
+        error: parsedError
+      };
     }
   }
 
   /**
    * Generate task title specifically
    * @param {string} description - Task description
-   * @returns {Promise<string>} - Generated task title
+   * @returns {Promise<object>} - Generated task title with metadata
    */
   async generateTaskTitle(description) {
     return this.generateTitle(description, {
@@ -110,7 +153,7 @@ class OpenAIService {
   /**
    * Generate general title for content
    * @param {string} content - Content to generate title for
-   * @returns {Promise<string>} - Generated title
+   * @returns {Promise<object>} - Generated title with metadata
    */
   async generateContentTitle(content) {
     return this.generateTitle(content, {
