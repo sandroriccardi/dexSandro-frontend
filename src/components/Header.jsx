@@ -41,6 +41,14 @@ const Header = () => {
               </Link>
             </li>
             <li><a href="#services" className="nav-link">{t('header.navigation.services')}</a></li>
+            <li>
+              <Link 
+                to="/talks" 
+                className={`nav-link ${location.pathname === '/talks' ? 'active' : ''}`}
+              >
+                {t('header.navigation.talks')}
+              </Link>
+            </li>
             <li><a href="#contact" className="nav-link">{t('header.navigation.contact')}</a></li>
           </ul>
         </nav>
