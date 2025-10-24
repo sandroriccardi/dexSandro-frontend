@@ -1,0 +1,139 @@
+{
+  "header": {
+    "logo": "Sandro",
+    "navigation": {
+      "home": "Inicio",
+      "allTasks": "Todas las Tareas",
+      "ai": "IA",
+      "services": "Servicios",
+      "contact": "Contacto"
+    }
+  },
+  "tasks": {
+    "title": "Gestor de Tareas",
+    "input": {
+      "placeholder": "Ingresa una nueva tarea...",
+      "addButton": "Añadir Tarea",
+      "addingButton": "Añadiendo..."
+    },
+    "status": {
+      "completed": "Completada",
+      "notCompleted": "No Completada"
+    },
+    "priority": {
+      "none": "Ninguna"
+    },
+    "messages": {
+      "noTasks": "No se encontraron tareas. ¡Añade tu primera tarea arriba!",
+      "loading": "Cargando tareas..."
+    },
+    "stats": {
+      "total": "Total",
+      "completed": "Completadas",
+      "remaining": "Pendientes"
+    }
+  },
+  "allTasks": {
+    "title": "Todas las Tareas",
+    "totalTasks": "Total de tareas: {{count}}",
+    "table": {
+      "headers": {
+        "title": "Título",
+        "description": "Descripción",
+        "completed": "Completada",
+        "priority": "Prioridad",
+        "createdDate": "Fecha de Creación",
+        "dueDate": "Fecha de Vencimiento",
+        "actions": "Acciones"
+      },
+      "noTitle": "Sin título",
+      "noDescription": "Sin descripción",
+      "noData": "N/A"
+    },
+    "messages": {
+      "noTasks": "No hay tareas disponibles.",
+      "loading": "Cargando tareas..."
+    },
+    "buttons": {
+      "addNewTask": "Añadir Nueva Tarea",
+      "delete": "Eliminar"
+    }
+  },
+  "ai": {
+    "title": "Generador de Contenido IA",
+    "subtitle": "Genera contenido creativo con asistencia de IA",
+    "form": {
+      "textLabel": "Ingresa tu texto o idea:",
+      "placeholder": "Describe lo que quieres crear...",
+      "generateButton": "Generar Contenido",
+      "generatingButton": "Generando..."
+    },
+    "result": {
+      "title": "Contenido Generado:",
+      "copyButton": "Copiar al Portapapeles",
+      "copied": "¡Copiado!"
+    },
+    "messages": {
+      "enterText": "Por favor ingresa texto para generar contenido.",
+      "error": "Error al generar contenido. Por favor inténtalo de nuevo."
+    }
+  },
+  "modals": {
+    "addTask": {
+      "title": "Añadir Nueva Tarea",
+      "form": {
+        "titleLabel": "Título *",
+        "titlePlaceholder": "Ingresa el título de la tarea...",
+        "descriptionLabel": "Descripción",
+        "descriptionPlaceholder": "Ingresa la descripción de la tarea...",
+        "priorityLabel": "Prioridad",
+        "priorityOptions": {
+          "none": "Ninguna",
+          "low": "Baja",
+          "medium": "Media",
+          "high": "Alta"
+        },
+        "dueDateLabel": "Fecha de Vencimiento"
+      },
+      "buttons": {
+        "cancel": "Cancelar",
+        "add": "Añadir Tarea"
+      },
+      "validation": {
+        "titleRequired": "El título es requerido"
+      }
+    },
+    "confirm": {
+      "title": "Confirmar Acción",
+      "message": "¿Estás seguro de que quieres eliminar esta tarea?",
+      "buttons": {
+        "cancel": "Cancelar",
+        "confirm": "Eliminar"
+      }
+    }
+  },
+  "toast": {
+    "messages": {
+      "taskAdded": "Tarea añadida exitosamente",
+      "taskDeleted": "Tarea eliminada exitosamente",
+      "taskUpdated": "Tarea actualizada exitosamente",
+      "addTaskError": "Error al añadir tarea",
+      "deleteTaskError": "Error al eliminar tarea",
+      "loadTasksError": "Error al cargar tareas"
+    },
+    "close": "Cerrar"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior"
+  }
+}

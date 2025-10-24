@@ -1,0 +1,139 @@
+{
+  "header": {
+    "logo": "Sandro",
+    "navigation": {
+      "home": "Home",
+      "allTasks": "All Tasks",
+      "ai": "AI",
+      "services": "Services",
+      "contact": "Contact"
+    }
+  },
+  "tasks": {
+    "title": "Task Manager",
+    "input": {
+      "placeholder": "Enter a new task...",
+      "addButton": "Add Task",
+      "addingButton": "Adding..."
+    },
+    "status": {
+      "completed": "Completed",
+      "notCompleted": "Not Completed"
+    },
+    "priority": {
+      "none": "None"
+    },
+    "messages": {
+      "noTasks": "No tasks found. Add your first task above!",
+      "loading": "Loading tasks..."
+    },
+    "stats": {
+      "total": "Total",
+      "completed": "Completed",
+      "remaining": "Remaining"
+    }
+  },
+  "allTasks": {
+    "title": "All Tasks",
+    "totalTasks": "Total tasks: {{count}}",
+    "table": {
+      "headers": {
+        "title": "Title",
+        "description": "Description",
+        "completed": "Completed",
+        "priority": "Priority",
+        "createdDate": "Created Date",
+        "dueDate": "Due Date",
+        "actions": "Actions"
+      },
+      "noTitle": "No title",
+      "noDescription": "No description",
+      "noData": "N/A"
+    },
+    "messages": {
+      "noTasks": "No tasks available.",
+      "loading": "Loading tasks..."
+    },
+    "buttons": {
+      "addNewTask": "Add New Task",
+      "delete": "Delete"
+    }
+  },
+  "ai": {
+    "title": "AI Content Generator",
+    "subtitle": "Generate creative content with AI assistance",
+    "form": {
+      "textLabel": "Enter your text or idea:",
+      "placeholder": "Describe what you want to create...",
+      "generateButton": "Generate Content",
+      "generatingButton": "Generating..."
+    },
+    "result": {
+      "title": "Generated Content:",
+      "copyButton": "Copy to Clipboard",
+      "copied": "Copied!"
+    },
+    "messages": {
+      "enterText": "Please enter some text to generate content.",
+      "error": "Failed to generate content. Please try again."
+    }
+  },
+  "modals": {
+    "addTask": {
+      "title": "Add New Task",
+      "form": {
+        "titleLabel": "Title *",
+        "titlePlaceholder": "Enter task title...",
+        "descriptionLabel": "Description",
+        "descriptionPlaceholder": "Enter task description...",
+        "priorityLabel": "Priority",
+        "priorityOptions": {
+          "none": "None",
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High"
+        },
+        "dueDateLabel": "Due Date"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "add": "Add Task"
+      },
+      "validation": {
+        "titleRequired": "Title is required"
+      }
+    },
+    "confirm": {
+      "title": "Confirm Action",
+      "message": "Are you sure you want to delete this task?",
+      "buttons": {
+        "cancel": "Cancel",
+        "confirm": "Delete"
+      }
+    }
+  },
+  "toast": {
+    "messages": {
+      "taskAdded": "Task added successfully",
+      "taskDeleted": "Task deleted successfully",
+      "taskUpdated": "Task updated successfully",
+      "addTaskError": "Failed to add task",
+      "deleteTaskError": "Failed to delete task",
+      "loadTasksError": "Failed to load tasks"
+    },
+    "close": "Close"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous"
+  }
+}

@@ -2,7 +2,7 @@
  * Unit tests for useTasks hook - addTask function
  */
 
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act } from '../../utils/test-utils';
 import { useTasks } from '../useTasks';
 import tasksApiService from '../../services/tasksApi.service';
 import openAIService from '../../services/openai.service';

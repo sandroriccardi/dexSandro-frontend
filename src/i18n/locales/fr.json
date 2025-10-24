@@ -1,0 +1,139 @@
+{
+  "header": {
+    "logo": "Sandro",
+    "navigation": {
+      "home": "Accueil",
+      "allTasks": "Toutes les Tâches",
+      "ai": "IA",
+      "services": "Services",
+      "contact": "Contact"
+    }
+  },
+  "tasks": {
+    "title": "Gestionnaire de Tâches",
+    "input": {
+      "placeholder": "Entrez une nouvelle tâche...",
+      "addButton": "Ajouter Tâche",
+      "addingButton": "Ajout..."
+    },
+    "status": {
+      "completed": "Terminée",
+      "notCompleted": "Non Terminée"
+    },
+    "priority": {
+      "none": "Aucune"
+    },
+    "messages": {
+      "noTasks": "Aucune tâche trouvée. Ajoutez votre première tâche ci-dessus !",
+      "loading": "Chargement des tâches..."
+    },
+    "stats": {
+      "total": "Total",
+      "completed": "Terminées",
+      "remaining": "Restantes"
+    }
+  },
+  "allTasks": {
+    "title": "Toutes les Tâches",
+    "totalTasks": "Total des tâches : {{count}}",
+    "table": {
+      "headers": {
+        "title": "Titre",
+        "description": "Description",
+        "completed": "Terminée",
+        "priority": "Priorité",
+        "createdDate": "Date de Création",
+        "dueDate": "Date d'Échéance",
+        "actions": "Actions"
+      },
+      "noTitle": "Pas de titre",
+      "noDescription": "Pas de description",
+      "noData": "N/A"
+    },
+    "messages": {
+      "noTasks": "Aucune tâche disponible.",
+      "loading": "Chargement des tâches..."
+    },
+    "buttons": {
+      "addNewTask": "Ajouter Nouvelle Tâche",
+      "delete": "Supprimer"
+    }
+  },
+  "ai": {
+    "title": "Générateur de Contenu IA",
+    "subtitle": "Générez du contenu créatif avec l'assistance de l'IA",
+    "form": {
+      "textLabel": "Entrez votre texte ou idée :",
+      "placeholder": "Décrivez ce que vous voulez créer...",
+      "generateButton": "Générer le Contenu",
+      "generatingButton": "Génération..."
+    },
+    "result": {
+      "title": "Contenu Généré :",
+      "copyButton": "Copier dans le Presse-papiers",
+      "copied": "Copié !"
+    },
+    "messages": {
+      "enterText": "Veuillez entrer du texte pour générer du contenu.",
+      "error": "Échec de la génération de contenu. Veuillez réessayer."
+    }
+  },
+  "modals": {
+    "addTask": {
+      "title": "Ajouter Nouvelle Tâche",
+      "form": {
+        "titleLabel": "Titre *",
+        "titlePlaceholder": "Entrez le titre de la tâche...",
+        "descriptionLabel": "Description",
+        "descriptionPlaceholder": "Entrez la description de la tâche...",
+        "priorityLabel": "Priorité",
+        "priorityOptions": {
+          "none": "Aucune",
+          "low": "Faible",
+          "medium": "Moyenne",
+          "high": "Élevée"
+        },
+        "dueDateLabel": "Date d'Échéance"
+      },
+      "buttons": {
+        "cancel": "Annuler",
+        "add": "Ajouter Tâche"
+      },
+      "validation": {
+        "titleRequired": "Le titre est requis"
+      }
+    },
+    "confirm": {
+      "title": "Confirmer l'Action",
+      "message": "Êtes-vous sûr de vouloir supprimer cette tâche ?",
+      "buttons": {
+        "cancel": "Annuler",
+        "confirm": "Supprimer"
+      }
+    }
+  },
+  "toast": {
+    "messages": {
+      "taskAdded": "Tâche ajoutée avec succès",
+      "taskDeleted": "Tâche supprimée avec succès",
+      "taskUpdated": "Tâche mise à jour avec succès",
+      "addTaskError": "Échec de l'ajout de la tâche",
+      "deleteTaskError": "Échec de la suppression de la tâche",
+      "loadTasksError": "Échec du chargement des tâches"
+    },
+    "close": "Fermer"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent"
+  }
+}

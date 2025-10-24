@@ -1,0 +1,139 @@
+{
+  "header": {
+    "logo": "Sandro",
+    "navigation": {
+      "home": "Home",
+      "allTasks": "Tutte le Attività",
+      "ai": "IA",
+      "services": "Servizi",
+      "contact": "Contatto"
+    }
+  },
+  "tasks": {
+    "title": "Gestore Attività",
+    "input": {
+      "placeholder": "Inserisci una nuova attività...",
+      "addButton": "Aggiungi Attività",
+      "addingButton": "Aggiungendo..."
+    },
+    "status": {
+      "completed": "Completata",
+      "notCompleted": "Non Completata"
+    },
+    "priority": {
+      "none": "Nessuna"
+    },
+    "messages": {
+      "noTasks": "Nessuna attività trovata. Aggiungi la tua prima attività sopra!",
+      "loading": "Caricamento attività..."
+    },
+    "stats": {
+      "total": "Totale",
+      "completed": "Completate",
+      "remaining": "Rimanenti"
+    }
+  },
+  "allTasks": {
+    "title": "Tutte le Attività",
+    "totalTasks": "Totale attività: {{count}}",
+    "table": {
+      "headers": {
+        "title": "Titolo",
+        "description": "Descrizione",
+        "completed": "Completata",
+        "priority": "Priorità",
+        "createdDate": "Data di Creazione",
+        "dueDate": "Data di Scadenza",
+        "actions": "Azioni"
+      },
+      "noTitle": "Nessun titolo",
+      "noDescription": "Nessuna descrizione",
+      "noData": "N/D"
+    },
+    "messages": {
+      "noTasks": "Nessuna attività disponibile.",
+      "loading": "Caricamento attività..."
+    },
+    "buttons": {
+      "addNewTask": "Aggiungi Nuova Attività",
+      "delete": "Elimina"
+    }
+  },
+  "ai": {
+    "title": "Generatore di Contenuti IA",
+    "subtitle": "Genera contenuti creativi con l'assistenza dell'IA",
+    "form": {
+      "textLabel": "Inserisci il tuo testo o idea:",
+      "placeholder": "Descrivi cosa vuoi creare...",
+      "generateButton": "Genera Contenuto",
+      "generatingButton": "Generando..."
+    },
+    "result": {
+      "title": "Contenuto Generato:",
+      "copyButton": "Copia negli Appunti",
+      "copied": "Copiato!"
+    },
+    "messages": {
+      "enterText": "Per favore inserisci del testo per generare contenuto.",
+      "error": "Errore nella generazione del contenuto. Riprova."
+    }
+  },
+  "modals": {
+    "addTask": {
+      "title": "Aggiungi Nuova Attività",
+      "form": {
+        "titleLabel": "Titolo *",
+        "titlePlaceholder": "Inserisci il titolo dell'attività...",
+        "descriptionLabel": "Descrizione",
+        "descriptionPlaceholder": "Inserisci la descrizione dell'attività...",
+        "priorityLabel": "Priorità",
+        "priorityOptions": {
+          "none": "Nessuna",
+          "low": "Bassa",
+          "medium": "Media",
+          "high": "Alta"
+        },
+        "dueDateLabel": "Data di Scadenza"
+      },
+      "buttons": {
+        "cancel": "Annulla",
+        "add": "Aggiungi Attività"
+      },
+      "validation": {
+        "titleRequired": "Il titolo è obbligatorio"
+      }
+    },
+    "confirm": {
+      "title": "Conferma Azione",
+      "message": "Sei sicuro di voler eliminare questa attività?",
+      "buttons": {
+        "cancel": "Annulla",
+        "confirm": "Elimina"
+      }
+    }
+  },
+  "toast": {
+    "messages": {
+      "taskAdded": "Attività aggiunta con successo",
+      "taskDeleted": "Attività eliminata con successo",
+      "taskUpdated": "Attività aggiornata con successo",
+      "addTaskError": "Errore nell'aggiunta dell'attività",
+      "deleteTaskError": "Errore nell'eliminazione dell'attività",
+      "loadTasksError": "Errore nel caricamento delle attività"
+    },
+    "close": "Chiudi"
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Errore",
+    "success": "Successo",
+    "cancel": "Annulla",
+    "save": "Salva",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "close": "Chiudi",
+    "back": "Indietro",
+    "next": "Avanti",
+    "previous": "Precedente"
+  }
+}

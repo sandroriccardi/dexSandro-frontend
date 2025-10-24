@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '../../utils/test-utils';
 import '@testing-library/jest-dom';
 import AllTasks from '../AllTasks';
 import { tasksApiService } from '../../services';
@@ -124,7 +124,7 @@ describe('AllTasks Component', () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByText('Failed to fetch tasks')).toBeInTheDocument();
+        expect(screen.getByText('Failed to load tasks')).toBeInTheDocument();
       });
     });
 
@@ -235,15 +235,15 @@ describe('AllTasks Component', () => {
     });
 
     it('should open add task modal when Add Task button is clicked', async () => {
-      const addButton = screen.getByText('Add Task');
+      const addButton = screen.getByLabelText('Add new task');
       
       fireEvent.click(addButton);
       
       expect(screen.getByTestId('add-task-modal')).toBeInTheDocument();
     });
 
-    it('should close add task modal when close button is clicked', async () => {
-      const addButton = screen.getByText('Add Task');
+    it('should open add task modal when Add Task button is clicked', async () => {
+      const addButton = screen.getByLabelText('Add new task');
       fireEvent.click(addButton);
       
       const closeButton = screen.getByTestId('modal-close');
@@ -265,7 +265,7 @@ describe('AllTasks Component', () => {
 
       tasksApiService.createTask.mockResolvedValue(newTask);
 
-      const addButton = screen.getByText('Add Task');
+      const addButton = screen.getByLabelText('Add new task');
       fireEvent.click(addButton);
 
       const modalAddButton = screen.getByTestId('modal-add-task');
@@ -291,7 +291,7 @@ describe('AllTasks Component', () => {
     it('should show error toast when add task fails', async () => {
       tasksApiService.createTask.mockRejectedValue(new Error('Create failed'));
 
-      const addButton = screen.getByText('Add Task');
+      const addButton = screen.getByLabelText('Add new task');
       fireEvent.click(addButton);
 
       const modalAddButton = screen.getByTestId('modal-add-task');
@@ -318,7 +318,7 @@ describe('AllTasks Component', () => {
     });
 
     it('should open confirm modal when delete button is clicked', async () => {
-      const deleteButtons = screen.getAllByText('Delete');
+      const deleteButtons = screen.getAllByLabelText(/Delete task:/);
       
       fireEvent.click(deleteButtons[0]);
       
@@ -327,7 +327,7 @@ describe('AllTasks Component', () => {
     });
 
     it('should close confirm modal when cancel is clicked', async () => {
-      const deleteButtons = screen.getAllByText('Delete');
+      const deleteButtons = screen.getAllByLabelText(/Delete task:/);
       fireEvent.click(deleteButtons[0]);
       
       const cancelButton = screen.getByTestId('cancel-delete');
@@ -339,7 +339,7 @@ describe('AllTasks Component', () => {
     it('should delete task successfully when confirmed', async () => {
       tasksApiService.deleteTask.mockResolvedValue();
 
-      const deleteButtons = screen.getAllByText('Delete');
+      const deleteButtons = screen.getAllByLabelText(/Delete task:/);
       fireEvent.click(deleteButtons[0]);
 
       const confirmButton = screen.getByTestId('confirm-delete');
@@ -360,7 +360,7 @@ describe('AllTasks Component', () => {
     it('should show error toast when delete fails', async () => {
       tasksApiService.deleteTask.mockRejectedValue(new Error('Delete failed'));
 
-      const deleteButtons = screen.getAllByText('Delete');
+      const deleteButtons = screen.getAllByLabelText(/Delete task:/);
       fireEvent.click(deleteButtons[0]);
 
       const confirmButton = screen.getByTestId('confirm-delete');
@@ -379,7 +379,7 @@ describe('AllTasks Component', () => {
 
       expect(screen.getByText('Total tasks: 3')).toBeInTheDocument();
 
-      const deleteButtons = screen.getAllByText('Delete');
+      const deleteButtons = screen.getAllByLabelText(/Delete task:/);
       fireEvent.click(deleteButtons[0]);
 
       const confirmButton = screen.getByTestId('confirm-delete');
@@ -406,7 +406,7 @@ describe('AllTasks Component', () => {
       // Trigger an error to show toast
       tasksApiService.createTask.mockRejectedValue(new Error('Create failed'));
 
-      const addButton = screen.getByText('Add Task');
+      const addButton = screen.getByLabelText('Add new task');
       fireEvent.click(addButton);
 
       const modalAddButton = screen.getByTestId('modal-add-task');
@@ -432,7 +432,7 @@ describe('AllTasks Component', () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByText('Failed to fetch tasks')).toBeInTheDocument();
+        expect(screen.getByText('Failed to load tasks')).toBeInTheDocument();
       });
 
       // The error state shows the error message, but the toast might not be visible in error state
@@ -467,7 +467,7 @@ describe('AllTasks Component', () => {
     });
 
     it('should pass correct props to AddTaskModal', async () => {
-      const addButton = screen.getByText('Add Task');
+      const addButton = screen.getByLabelText('Add new task');
       fireEvent.click(addButton);
 
       expect(screen.getByTestId('add-task-modal')).toBeInTheDocument();
@@ -476,7 +476,7 @@ describe('AllTasks Component', () => {
     });
 
     it('should pass correct props to ConfirmModal', async () => {
-      const deleteButtons = screen.getAllByText('Delete');
+      const deleteButtons = screen.getAllByLabelText(/Delete task:/);
       fireEvent.click(deleteButtons[0]);
 
       expect(screen.getByTestId('confirm-modal')).toBeInTheDocument();
@@ -490,7 +490,7 @@ describe('AllTasks Component', () => {
       const newTask = { id: 4, title: 'New Task' };
       tasksApiService.createTask.mockResolvedValue(newTask);
 
-      const addButton = screen.getByText('Add Task');
+      const addButton = screen.getByLabelText('Add new task');
       fireEvent.click(addButton);
 
       const modalAddButton = screen.getByTestId('modal-add-task');
@@ -516,7 +516,7 @@ describe('AllTasks Component', () => {
     });
 
     it('should have proper ARIA labels on delete buttons', () => {
-      const deleteButtons = screen.getAllByLabelText('delete');
+      const deleteButtons = screen.getAllByLabelText(/Delete task:/);
       expect(deleteButtons).toHaveLength(3);
     });
 
