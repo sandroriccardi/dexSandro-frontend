@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { tasksApiService } from '../services';
 import AddTaskModal from './AddTaskModal';
+import EditTaskModal from './EditTaskModal';
 import ConfirmModal from './ConfirmModal';
 import Toast from './Toast';
 import './AllTasks.css';
@@ -12,6 +13,8 @@ const AllTasks = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState(null);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
   const [toast, setToast] = useState({ isVisible: false, message: '', type: 'info' });
@@ -32,8 +35,8 @@ const AllTasks = () => {
   const handleConfirmDelete = async () => {
     if (taskToDelete) {
       try {
-        await tasksApiService.deleteTask(taskToDelete);
-        setTasks(tasks.filter((task) => task.id !== taskToDelete));
+        await tasksApiService.deleteTask(taskToDelete.id);
+        setTasks(tasks.filter((task) => task.id !== taskToDelete.id));
         showToast(t('toast.messages.taskDeleted'), 'success');
       } catch (err) {
         showToast(t('toast.messages.deleteTaskError'), 'error');
@@ -47,6 +50,27 @@ const AllTasks = () => {
   const handleCancelDelete = () => {
     setIsConfirmModalOpen(false);
     setTaskToDelete(null);
+  };
+
+  const handleEditClick = (task) => {
+    setTaskToEdit(task);
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateTask = async (updatedTask) => {
+    try {
+      const response = await tasksApiService.updateTask(updatedTask.id, updatedTask);
+      setTasks(tasks.map(task => task.id === updatedTask.id ? response : task));
+      showToast(t('toast.messages.taskUpdated'), 'success');
+    } catch (err) {
+      showToast(t('toast.messages.updateTaskError'), 'error');
+      console.error('Error updating task:', err);
+    }
+  };
+
+  const handleCloseEditModal = () => {
+    setIsEditModalOpen(false);
+    setTaskToEdit(null);
   };
 
   const handleAddTask = async (taskData) => {
@@ -139,18 +163,24 @@ const AllTasks = () => {
                   </td>
                   <td>{task.createdAt ? new Date(task.createdAt).toLocaleDateString() : t('allTasks.table.noData')}</td>
                   <td>{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : t('allTasks.table.noData')}</td>
-                  <td>
-                    <button 
-                      onClick={() => handleDeleteClick(task.id)} 
-                      className="delete-task-btn"
-                      type="button"
-                      aria-label={`Delete task: ${task.title || 'Untitled task'}`}
-                      title={`Delete "${task.title || 'Untitled task'}"`}
-                    >
-                      <span className="delete-icon" aria-hidden="true">🗑️</span>
-                      {/* <span className="delete-text">Delete</span> */}
-                    </button>
-                  </td>
+                                          <td className="actions">
+                          <button
+                            className="edit-btn"
+                            onClick={() => handleEditClick(task)}
+                            title={t('modals.editTask.title')}
+                            aria-label={`Edit task: ${task.title}`}
+                          >
+                            ✏️
+                          </button>
+                          <button
+                            className="delete-btn"
+                            onClick={() => handleDeleteClick(task)}
+                            title={t('buttons.delete')}
+                            aria-label={`Delete task: ${task.title}`}
+                          >
+                            🗑️
+                          </button>
+                        </td>
                 </tr>
               ))}
             </tbody>
@@ -180,6 +210,12 @@ const AllTasks = () => {
         onClose={handleCancelDelete}
         onConfirm={handleConfirmDelete}
         message={t('modals.confirm.message')}
+      />
+      <EditTaskModal
+        isOpen={isEditModalOpen}
+        onClose={handleCloseEditModal}
+        onUpdateTask={handleUpdateTask}
+        task={taskToEdit}
       />
       <Toast
         message={toast.message}

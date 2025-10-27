@@ -111,6 +111,35 @@
         "cancel": "Cancel",
         "confirm": "Delete"
       }
+    },
+    "editTask": {
+      "title": "Edit Task",
+      "fields": {
+        "title": "Title",
+        "description": "Description",
+        "dueDate": "Due Date",
+        "priority": "Priority",
+        "completed": "Mark as completed"
+      },
+      "placeholders": {
+        "title": "Enter task title...",
+        "description": "Enter task description..."
+      },
+      "options": {
+        "noPriority": "No Priority",
+        "priority1": "Low (1)",
+        "priority2": "Medium (2)",
+        "priority3": "High (3)"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "update": "Update Task"
+      },
+      "errors": {
+        "titleRequired": "Title is required",
+        "descriptionRequired": "Please enter a description first to generate a title"
+      },
+      "generateTitle": "Generate title using AI"
     }
   },
   "toast": {
