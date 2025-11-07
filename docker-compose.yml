@@ -29,3 +29,18 @@ services:
     container_name: dexsandro-frontend-dev-container
     profiles:
       - dev
+
+  # QA/Testing service
+  dexsandro-frontend-qa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3002:80"
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_ENV=qa
+    restart: unless-stopped
+    container_name: dexsandro-frontend-qa-container
+    profiles:
+      - qa
