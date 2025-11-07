@@ -1,0 +1,195 @@
+/* Talk Detail Modal Styles */
+.talk-detail-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.talk-detail-modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: modalSlideIn 0.2s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.talk-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.talk-detail-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.talk-detail-close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #6b7280;
+  transition: color 0.2s ease;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.talk-detail-close-btn:hover {
+  color: #374151;
+  background-color: #f3f4f6;
+}
+
+.talk-detail-body {
+  padding: 1.5rem;
+}
+
+.talk-detail-section {
+  margin-bottom: 1.5rem;
+}
+
+.talk-detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.talk-detail-section h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.875rem;
+}
+
+.talk-detail-datetime {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.talk-detail-date {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.talk-detail-time {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.talk-detail-description {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #66eaa8;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  color: #374151;
+  min-height: 60px;
+  font-size: 0.95rem;
+}
+
+.talk-detail-id {
+  font-family: 'Courier New', monospace;
+  background-color: #f3f4f6;
+  padding: 0.5rem;
+  border-radius: 6px;
+  color: #6b7280;
+  font-size: 0.875rem;
+  display: inline-block;
+}
+
+/* Star Rating Display */
+.star-display {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.star-display .star {
+  font-size: 1.25rem;
+  color: #fbbf24;
+  transition: color 0.2s ease;
+}
+
+.star-display .star-filled {
+  color: #f59e0b;
+}
+
+.star-display .star-empty {
+  color: #d1d5db;
+}
+
+.star-display .rating-text {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.no-rating {
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .talk-detail-modal-overlay {
+    padding: 0.5rem;
+  }
+  
+  .talk-detail-modal-content {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  .talk-detail-header {
+    padding: 1rem 1rem 0.75rem;
+  }
+  
+  .talk-detail-header h2 {
+    font-size: 1.25rem;
+  }
+  
+  .talk-detail-body {
+    padding: 1rem;
+  }
+  
+  .talk-detail-section {
+    margin-bottom: 1.25rem;
+  }
+}

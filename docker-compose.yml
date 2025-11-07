@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Development service (optional)
+  dexsandro-frontend-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        - REACT_APP_API_BASE_URL=http://localhost:5135
+        - REACT_APP_ENVIRONMENT=development
+    ports:
+      - "3001:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_ENVIRONMENT=development
+    restart: unless-stopped
+    container_name: dexsandro-frontend-dev-container
+    profiles:
+      - dev
+
+  # QA/Testing service
+  dexsandro-frontend-qa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - REACT_APP_API_BASE_URL=http://localhost:5136
+        - GENERATE_SOURCEMAP=true
+    ports:
+      - "3002:80"
+    environment:
+      - NODE_ENV=qa
+      - REACT_APP_ENV=qa
+    restart: unless-stopped
+    container_name: dexsandro-frontend-qa-container
+    profiles:
+      - qa

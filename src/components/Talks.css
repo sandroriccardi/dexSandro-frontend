@@ -125,6 +125,17 @@
   background-color: #e8f5e8;
 }
 
+.talks-table tbody tr.clickable-row {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.talks-table tbody tr.clickable-row:hover {
+  background-color: #d1fae5;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(75, 162, 118, 0.15);
+}
+
 .talks-table td {
   padding: 1rem;
   border-bottom: 1px solid #e5e7eb;

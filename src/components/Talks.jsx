@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import NewTalkModal from './NewTalkModal';
+import TalkDetailModal from './TalkDetailModal';
 import VibesChart from './VibesChart';
+import CONFIG from '../config/app.config';
 import './Talks.css';
 
 const Talks = () => {
@@ -11,12 +13,14 @@ const Talks = () => {
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedTalk, setSelectedTalk] = useState(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchTalks = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:5135/api/Talks');
+        const response = await fetch(`${CONFIG.API.BASE_URL}/api/Talks`);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -53,7 +57,7 @@ const Talks = () => {
   const handleNewTalk = async (talkData) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:5135/api/Talks', {
+      const response = await fetch(`${CONFIG.API.BASE_URL}/api/Talks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,6 +89,16 @@ const Talks = () => {
   const renderStars = (rating) => {
     if (!rating || rating === 0) return 'N/A';
     return '★'.repeat(rating) + '☆'.repeat(5 - rating) + ` (${rating}/5)`;
+  };
+
+  const handleRowClick = (talk) => {
+    setSelectedTalk(talk);
+    setIsDetailModalOpen(true);
+  };
+
+  const handleCloseDetailModal = () => {
+    setIsDetailModalOpen(false);
+    setSelectedTalk(null);
   };
 
   if (loading) {
@@ -148,7 +162,12 @@ const Talks = () => {
             </thead>
             <tbody>
               {talks.map((talk, index) => (
-                <tr key={talk.id || index} className="talk-row">
+                <tr 
+                  key={talk.id || index} 
+                  className="talk-row clickable-row"
+                  onClick={() => handleRowClick(talk)}
+                  title="Click to view details"
+                >
                   <td className="talk-date">{formatDate(talk.date)}</td>
                   <td className="talk-personal-vibe">{renderStars(talk.personalVibe)}</td>
                   <td className="talk-manager-vibe">{renderStars(talk.managerVibe)}</td>
@@ -163,6 +182,12 @@ const Talks = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleNewTalk}
+      />
+
+      <TalkDetailModal
+        isOpen={isDetailModalOpen}
+        onClose={handleCloseDetailModal}
+        talk={selectedTalk}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
@@ -9,6 +9,19 @@ import Footer from './components/Footer';
 import './App.css';
 
 function App() {
+  useEffect(() => {
+    // Set the browser title based on the environment
+    const baseTitle = 'Sandro';
+    const isDevelopment = process.env.NODE_ENV === 'development' || 
+                         process.env.REACT_APP_ENVIRONMENT === 'development';
+    
+    if (isDevelopment) {
+      document.title = `${baseTitle} - DEVELOPMENT`;
+    } else {
+      document.title = baseTitle;
+    }
+  }, []);
+
   return (
     <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className="App">
