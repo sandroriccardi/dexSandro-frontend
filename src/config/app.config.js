@@ -28,7 +28,7 @@ const CONFIG = {
   
   // Backend API Configuration
   API: {
-    BASE_URL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:5135',
+    BASE_URL: process.env.REACT_APP_API_BASE_URL,
     TIMEOUT: parseInt(process.env.REACT_APP_API_TIMEOUT) || 10000
   }
 };

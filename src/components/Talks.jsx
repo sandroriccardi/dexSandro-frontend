@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import NewTalkModal from './NewTalkModal';
 import VibesChart from './VibesChart';
+import CONFIG from '../config/app.config';
 import './Talks.css';
 
 const Talks = () => {
@@ -16,7 +17,7 @@ const Talks = () => {
     const fetchTalks = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:5135/api/Talks');
+        const response = await fetch(`${CONFIG.API.BASE_URL}/api/Talks`);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -53,7 +54,7 @@ const Talks = () => {
   const handleNewTalk = async (talkData) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:5135/api/Talks', {
+      const response = await fetch(`${CONFIG.API.BASE_URL}/api/Talks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

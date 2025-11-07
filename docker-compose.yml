@@ -1,22 +1,14 @@
 version: '3.8'
 
 services:
-  dexsandro-frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:80"
-    environment:
-      - NODE_ENV=production
-    restart: unless-stopped
-    container_name: dexsandro-frontend-container
-    
   # Development service (optional)
   dexsandro-frontend-dev:
     build:
       context: .
       dockerfile: Dockerfile.dev
+      args:
+        - REACT_APP_OPENAI_API_KEY=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
+        - REACT_APP_API_BASE_URL=http://localhost:5135
     ports:
       - "3001:3000"
     volumes:
@@ -35,10 +27,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - REACT_APP_API_BASE_URL=http://localhost:5136
+        - REACT_APP_OPENAI_API_KEY=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
+        - GENERATE_SOURCEMAP=true
     ports:
       - "3002:80"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=qa
       - REACT_APP_ENV=qa
     restart: unless-stopped
     container_name: dexsandro-frontend-qa-container
