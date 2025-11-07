@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile.dev
       args:
         - REACT_APP_API_BASE_URL=http://localhost:5135
+        - REACT_APP_ENVIRONMENT=development
     ports:
       - "3001:3000"
     volumes:
@@ -16,6 +17,7 @@ services:
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_ENVIRONMENT=development
     restart: unless-stopped
     container_name: dexsandro-frontend-dev-container
     profiles:
