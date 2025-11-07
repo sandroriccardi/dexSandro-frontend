@@ -118,10 +118,19 @@ dexSandro-frontend/
 │   ├── App.css                 # Global application styles
 │   └── index.js                # Application entry point
 ├── build/                      # Production build output
+├── docker-run.sh              # Quick Docker build and run script
+├── docker-redeploy.sh         # Docker redeployment script
+├── docker-dev.sh              # Development Docker environment script
+├── Dockerfile                 # Multi-stage production Docker build
+├── Dockerfile.dev             # Development Docker environment
+├── docker-compose.yml         # Docker Compose configuration
+├── nginx.conf                 # Nginx production configuration
+├── .dockerignore              # Docker build exclusions
 ├── nodemon.json               # Nodemon configuration for auto-rebuild
 ├── package.json               # Dependencies and scripts
 ├── API_INTEGRATION.md         # API integration documentation
 ├── NAVIGATION_README.md       # Navigation system documentation
+├── DOCKER_README.md           # Comprehensive Docker documentation
 ├── .gitignore                 # Git ignore rules
 └── README.md                  # Project documentation
 ```
@@ -139,24 +148,39 @@ dexSandro-frontend/
 
 ## 📦 Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/sandroriccardi/dexSandro-frontend.git
-   cd dexSandro-frontend
-   ```
+### Option 1: Docker (Recommended)
+```bash
+# Clone the repository
+git clone https://github.com/sandroriccardi/dexSandro-frontend.git
+cd dexSandro-frontend
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+# Quick Docker start (production)
+./docker-run.sh
 
-3. **Start the development server**
-   ```bash
-   npm start
-   ```
+# Or development with hot reloading
+./docker-dev.sh
+```
 
-4. **Open your browser**
-   Navigate to `http://localhost:3000`
+### Option 2: Local Development
+```bash
+# Clone the repository
+git clone https://github.com/sandroriccardi/dexSandro-frontend.git
+cd dexSandro-frontend
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm start
+
+# Or use auto-rebuild development (recommended)
+npm run serve:watch
+```
+
+### Access the Application
+- **Docker Production**: http://localhost:3000
+- **Docker Development**: http://localhost:3001 (with hot reloading)
+- **Local Development**: http://localhost:3000
 
 ## 🔧 Available Scripts
 
@@ -170,6 +194,154 @@ dexSandro-frontend/
 - **`npm run test:coverage`** - Runs tests with coverage report
 - **`npm run test:ci`** - Runs tests for continuous integration
 - **`npm run eject`** - Ejects from Create React App (one-way operation)
+
+## 🐳 Docker Deployment
+
+The application is fully dockerized with production-ready configurations for easy deployment and development.
+
+### Quick Docker Start
+
+```bash
+# Option 1: Quick build and run (recommended)
+./docker-run.sh
+
+# Option 2: Docker Compose (production)
+docker-compose up --build
+
+# Option 3: Development with hot reloading
+./docker-dev.sh
+```
+
+### Docker Files Overview
+
+- **`Dockerfile`** - Multi-stage production build with Nginx
+- **`Dockerfile.dev`** - Development environment with hot reloading
+- **`docker-compose.yml`** - Container orchestration for multiple environments
+- **`nginx.conf`** - Optimized Nginx configuration with security headers
+- **`.dockerignore`** - Excludes unnecessary files from Docker builds
+
+### Docker Deployment Options
+
+#### Production Deployment
+```bash
+# Build and run production container
+docker build -t dexsandro-frontend .
+docker run -d -p 3000:80 --name dexsandro-frontend-container dexsandro-frontend
+
+# Using Docker Compose
+docker-compose up --build -d
+```
+
+#### Development with Hot Reloading
+```bash
+# Start development environment
+docker-compose --profile dev up --build
+
+# Or use the provided script
+./docker-dev.sh
+```
+
+### Redeployment After Changes
+
+#### Quick Redeploy (Production)
+```bash
+./docker-redeploy.sh
+```
+This script:
+- Stops existing container
+- Rebuilds the image with your changes
+- Starts a new container
+- **Best for**: Production-like testing
+
+#### Development Mode (Hot Reloading)
+```bash
+./docker-dev.sh
+```
+- Runs on port 3001
+- **Hot reloading** - changes reflect automatically
+- No need to rebuild for code changes
+- **Best for**: Active development
+
+#### Docker Compose Redeploy
+```bash
+# Stop current containers
+docker-compose down
+
+# Rebuild and start (production)
+docker-compose up --build -d
+
+# Or for development
+docker-compose --profile dev up --build
+```
+
+### Docker Features
+
+#### Multi-Stage Production Build
+- **Stage 1**: Node.js builds the React application
+- **Stage 2**: Nginx serves optimized static files
+- **Benefits**: Small image size, fast startup, production-optimized
+
+#### Nginx Configuration
+- **Gzip compression** for better performance
+- **Security headers** (XSS protection, content type options)
+- **React Router support** (SPA routing with fallback)
+- **Static asset caching** (1 year for JS/CSS/images)
+- **Health check endpoint** at `/health`
+
+#### Development Environment
+- **Hot reloading** with volume mounting
+- **All dependencies** including dev dependencies
+- **Live updates** without container rebuild
+- **Debugging support** with source maps
+
+### Container Management
+
+```bash
+# Check running containers
+docker ps
+
+# View logs
+docker logs dexsandro-frontend-container
+
+# Stop container
+docker stop dexsandro-frontend-container
+
+# Remove container
+docker rm dexsandro-frontend-container
+
+# Access container shell (for debugging)
+docker exec -it dexsandro-frontend-container sh
+
+# Health check
+curl http://localhost:3000/health
+```
+
+### Environment Variables
+
+```bash
+# Pass environment variables to container
+docker run -p 3000:80 -e REACT_APP_API_URL=https://your-api.com dexsandro-frontend
+
+# Using docker-compose
+services:
+  dexsandro-frontend:
+    environment:
+      - REACT_APP_API_URL=https://your-api.com
+```
+
+### Docker URLs
+
+- **Production**: http://localhost:3000
+- **Development**: http://localhost:3001 (with hot reloading)
+- **Health Check**: http://localhost:3000/health
+
+### Performance Optimizations
+
+- **Multi-stage builds** reduce final image size
+- **Nginx gzip compression** reduces bandwidth usage
+- **Static asset caching** improves load times
+- **Layer caching** speeds up rebuilds
+- **Minimal attack surface** (only static files served)
 
 ## 🔄 Development Workflow
 
