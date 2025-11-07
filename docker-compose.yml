@@ -7,7 +7,6 @@ services:
       context: .
       dockerfile: Dockerfile.dev
       args:
-        - REACT_APP_OPENAI_API_KEY=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
         - REACT_APP_API_BASE_URL=http://localhost:5135
     ports:
       - "3001:3000"
@@ -29,7 +28,6 @@ services:
       dockerfile: Dockerfile
       args:
         - REACT_APP_API_BASE_URL=http://localhost:5136
-        - REACT_APP_OPENAI_API_KEY=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
         - GENERATE_SOURCEMAP=true
     ports:
       - "3002:80"
