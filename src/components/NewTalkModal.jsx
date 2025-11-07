@@ -207,8 +207,8 @@ const NewTalkModal = ({ isOpen, onClose, onSubmit }) => {
               onChange={handleInputChange}
               disabled={isSubmitting}
               className={errors.description ? 'error' : ''}
-              rows="4"
-              placeholder="Describe the talk..."
+              rows="8"
+              placeholder="Describe the talk in detail..."
             />
             {errors.description && <span className="error-message">{errors.description}</span>}
           </div>
