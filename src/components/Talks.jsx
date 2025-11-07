@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import NewTalkModal from './NewTalkModal';
+import TalkDetailModal from './TalkDetailModal';
 import VibesChart from './VibesChart';
 import CONFIG from '../config/app.config';
 import './Talks.css';
@@ -12,6 +13,8 @@ const Talks = () => {
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedTalk, setSelectedTalk] = useState(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchTalks = async () => {
@@ -88,6 +91,16 @@ const Talks = () => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating) + ` (${rating}/5)`;
   };
 
+  const handleRowClick = (talk) => {
+    setSelectedTalk(talk);
+    setIsDetailModalOpen(true);
+  };
+
+  const handleCloseDetailModal = () => {
+    setIsDetailModalOpen(false);
+    setSelectedTalk(null);
+  };
+
   if (loading) {
     return (
       <div className="talks-container">
@@ -149,7 +162,12 @@ const Talks = () => {
             </thead>
             <tbody>
               {talks.map((talk, index) => (
-                <tr key={talk.id || index} className="talk-row">
+                <tr 
+                  key={talk.id || index} 
+                  className="talk-row clickable-row"
+                  onClick={() => handleRowClick(talk)}
+                  title="Click to view details"
+                >
                   <td className="talk-date">{formatDate(talk.date)}</td>
                   <td className="talk-personal-vibe">{renderStars(talk.personalVibe)}</td>
                   <td className="talk-manager-vibe">{renderStars(talk.managerVibe)}</td>
@@ -164,6 +182,12 @@ const Talks = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleNewTalk}
+      />
+
+      <TalkDetailModal
+        isOpen={isDetailModalOpen}
+        onClose={handleCloseDetailModal}
+        talk={selectedTalk}
       />
     </div>
   );
