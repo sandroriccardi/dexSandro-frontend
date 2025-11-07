@@ -77,6 +77,17 @@
   background-color: #f8f9fa;
 }
 
+.tasks-table tbody tr.clickable-row {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tasks-table tbody tr.clickable-row:hover {
+  background-color: #e8f5e8;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(75, 162, 118, 0.15);
+}
+
 .task-title {
   font-weight: 500;
   color: #495057;

@@ -1,0 +1,259 @@
+/* Task Detail Modal Styles */
+.task-detail-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.task-detail-modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: taskModalSlideIn 0.2s ease-out;
+}
+
+@keyframes taskModalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.task-detail-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.task-detail-close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #6b7280;
+  transition: color 0.2s ease;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.task-detail-close-btn:hover {
+  color: #374151;
+  background-color: #f3f4f6;
+}
+
+.task-detail-body {
+  padding: 1.5rem;
+}
+
+.task-detail-section {
+  margin-bottom: 1.5rem;
+}
+
+.task-detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.task-detail-section h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.875rem;
+}
+
+.task-detail-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.task-detail-half {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.task-detail-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  background-color: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+}
+
+.task-detail-description {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #66eaa8;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  color: #374151;
+  min-height: 60px;
+  font-size: 0.95rem;
+}
+
+.task-detail-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.task-detail-status.completed {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #10b981;
+}
+
+.task-detail-status.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #f59e0b;
+}
+
+.status-icon {
+  font-size: 1.125rem;
+}
+
+.task-detail-priority {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.priority-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.priority-text {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.task-detail-datetime {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.task-detail-date {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.task-detail-time {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.task-detail-no-date {
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
+}
+
+.task-detail-talk-id {
+  font-family: 'Courier New', monospace;
+  background-color: #eff6ff;
+  padding: 0.75rem;
+  border-radius: 6px;
+  color: #1e40af;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: inline-block;
+  border: 1px solid #bfdbfe;
+}
+
+.task-detail-id {
+  font-family: 'Courier New', monospace;
+  background-color: #f3f4f6;
+  padding: 0.5rem;
+  border-radius: 6px;
+  color: #6b7280;
+  font-size: 0.875rem;
+  display: inline-block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .task-detail-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .task-detail-half {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .task-detail-modal-overlay {
+    padding: 0.5rem;
+  }
+  
+  .task-detail-modal-content {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  .task-detail-header {
+    padding: 1rem 1rem 0.75rem;
+  }
+  
+  .task-detail-header h2 {
+    font-size: 1.25rem;
+  }
+  
+  .task-detail-body {
+    padding: 1rem;
+  }
+  
+  .task-detail-section {
+    margin-bottom: 1.25rem;
+  }
+}

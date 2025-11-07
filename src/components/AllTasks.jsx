@@ -4,6 +4,7 @@ import { tasksApiService } from '../services';
 import AddTaskModal from './AddTaskModal';
 import EditTaskModal from './EditTaskModal';
 import ConfirmModal from './ConfirmModal';
+import TaskDetailModal from './TaskDetailModal';
 import Toast from './Toast';
 import './AllTasks.css';
 
@@ -17,6 +18,8 @@ const AllTasks = () => {
   const [taskToEdit, setTaskToEdit] = useState(null);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [toast, setToast] = useState({ isVisible: false, message: '', type: 'info' });
 
   const showToast = (message, type = 'info') => {
@@ -71,6 +74,20 @@ const AllTasks = () => {
   const handleCloseEditModal = () => {
     setIsEditModalOpen(false);
     setTaskToEdit(null);
+  };
+
+  const handleRowClick = (task, event) => {
+    // Don't open detail modal if clicking on action buttons
+    if (event.target.closest('.actions')) {
+      return;
+    }
+    setSelectedTask(task);
+    setIsDetailModalOpen(true);
+  };
+
+  const handleCloseDetailModal = () => {
+    setIsDetailModalOpen(false);
+    setSelectedTask(null);
   };
 
   const handleAddTask = async (taskData) => {
@@ -147,7 +164,12 @@ const AllTasks = () => {
             </thead>
             <tbody>
               {tasks.map((task) => (
-                <tr key={task.id} className={`task-row priority-${task.priority ? task.priority.toString().toLowerCase() : 'none'}`} >
+                <tr 
+                  key={task.id} 
+                  className={`task-row priority-${task.priority ? task.priority.toString().toLowerCase() : 'none'} clickable-row`}
+                  onClick={(e) => handleRowClick(task, e)}
+                  title="Click to view details"
+                >
                   {/* <td>{task.id}</td> */}
                   <td className="task-title">{task.title || t('allTasks.table.noTitle')}</td>
                   <td className="task-description">{task.description || t('allTasks.table.noDescription')}</td>
@@ -216,6 +238,11 @@ const AllTasks = () => {
         onClose={handleCloseEditModal}
         onUpdateTask={handleUpdateTask}
         task={taskToEdit}
+      />
+      <TaskDetailModal
+        isOpen={isDetailModalOpen}
+        onClose={handleCloseDetailModal}
+        task={selectedTask}
       />
       <Toast
         message={toast.message}
