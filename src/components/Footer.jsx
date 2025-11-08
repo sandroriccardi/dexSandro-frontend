@@ -1,4 +1,5 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Footer.css';
 import packageInfo from '../../package.json';
 
@@ -24,8 +25,22 @@ const Footer = () => {
             </ul>
           </div> */}
           <div className="footer-section">
-            <h4>Contact Info</h4>
-            <p>Email: sandroriccardi84@gmail.com</p>
+            <h4>
+              <FontAwesomeIcon icon="envelope" />
+              Contact Info
+            </h4>
+            <p>
+              <FontAwesomeIcon icon="envelope" />
+              Email: sandroriccardi84@gmail.com
+            </p>
+            <div className="social-links">
+              <a href="https://github.com/sandroriccardi" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={['fab', 'github']} />
+              </a>
+              <a href="https://linkedin.com/in/sandroriccardi" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={['fab', 'linkedin']} />
+              </a>
+            </div>
           </div>
         </div>
         <div className="footer-bottom">

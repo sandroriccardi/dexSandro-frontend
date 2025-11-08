@@ -40,3 +40,55 @@ ul {
 html {
   scroll-behavior: smooth;
 }
+
+/* Font Awesome Icon Styles */
+.svg-inline--fa {
+  margin-right: 0.25rem;
+}
+
+/* Button with icon styles */
+button .svg-inline--fa {
+  margin-right: 0.5rem;
+}
+
+button .svg-inline--fa:only-child {
+  margin-right: 0;
+}
+
+/* Toast icon styles */
+.toast-icon {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+/* Navigation icon styles */
+.nav-icon {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Loading and error states */
+.loading .svg-inline--fa,
+.error .svg-inline--fa,
+.no-tasks .svg-inline--fa {
+  margin-right: 0.5rem;
+  display: inline-block;
+}
+
+/* Social links */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.social-links a {
+  color: inherit;
+  font-size: 1.2rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #007bff;
+  transform: scale(1.1);
+}

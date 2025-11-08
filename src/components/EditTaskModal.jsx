@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './EditTaskModal.css';
 import openAIService from '../services/openai.service';
 
@@ -103,7 +104,7 @@ const EditTaskModal = ({ isOpen, onClose, onUpdateTask, task }) => {
         <div className="modal-header">
           <h2>{t('modals.editTask.title')}</h2>
           <button className="close-btn" onClick={handleClose} aria-label="Close modal">
-            ×
+            <FontAwesomeIcon icon="times" />
           </button>
         </div>
         
@@ -134,7 +135,11 @@ const EditTaskModal = ({ isOpen, onClose, onUpdateTask, task }) => {
                 disabled={!description.trim() || isGeneratingTitle}
                 title={t('modals.editTask.generateTitle')}
               >
-                {isGeneratingTitle ? '⏳' : '✨'}
+                {isGeneratingTitle ? (
+                  <FontAwesomeIcon icon="spinner" spin />
+                ) : (
+                  <FontAwesomeIcon icon="robot" />
+                )}
               </button>
             </div>
           </div>
@@ -196,9 +201,11 @@ const EditTaskModal = ({ isOpen, onClose, onUpdateTask, task }) => {
 
           <div className="modal-actions">
             <button type="button" onClick={handleClose} className="btn btn-secondary">
+              <FontAwesomeIcon icon="times" />
               {t('modals.editTask.buttons.cancel')}
             </button>
             <button type="submit" className="btn btn-primary">
+              <FontAwesomeIcon icon="save" />
               {t('modals.editTask.buttons.update')}
             </button>
           </div>

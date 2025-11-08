@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { tasksApiService } from '../services';
 import AddTaskModal from './AddTaskModal';
 import EditTaskModal from './EditTaskModal';
@@ -124,7 +124,10 @@ const AllTasks = () => {
   if (loading) {
     return (
       <div className="all-tasks-container" data-testid="loading-container">
-        <div className="loading">{t('allTasks.messages.loading')}</div>
+        <div className="loading">
+          <FontAwesomeIcon icon="spinner" spin />
+          {t('allTasks.messages.loading')}
+        </div>
       </div>
     );
   }
@@ -132,7 +135,10 @@ const AllTasks = () => {
   if (error) {
     return (
       <div className="all-tasks-container">
-        <div className="error">{error}</div>
+        <div className="error">
+          <FontAwesomeIcon icon="exclamation-triangle" />
+          {error}
+        </div>
       </div>
     );
   }
@@ -146,6 +152,7 @@ const AllTasks = () => {
       
       {tasks.length === 0 ? (
         <div className="no-tasks">
+          <FontAwesomeIcon icon="exclamation-triangle" />
           <p>{t('allTasks.messages.noTasks')}</p>
         </div>
       ) : (
@@ -193,7 +200,7 @@ const AllTasks = () => {
                             title={t('modals.editTask.title')}
                             aria-label={`Edit task: ${task.title}`}
                           >
-                            <FaEdit />
+                            <FontAwesomeIcon icon="edit" />
                           </button>
                           <button
                             className="delete-btn"
@@ -201,7 +208,7 @@ const AllTasks = () => {
                             title={t('buttons.delete')}
                             aria-label={`Delete task: ${task.title}`}
                           >
-                            <FaTrash style={{ color: '#dc3545' }} />
+                            <FontAwesomeIcon icon="trash" style={{ color: '#dc3545' }} />
                           </button>
                         </td>
                 </tr>
@@ -218,8 +225,8 @@ const AllTasks = () => {
           type="button"
           aria-label="Add new task"
         >
-          <span className="add-task-icon" aria-hidden="true">+</span>
-          {/* <span className="add-task-text">Add New Task</span> */}
+          <FontAwesomeIcon icon="plus" className="add-task-icon" aria-hidden="true" />
+          Add New Task
         </button>
       </div>
       

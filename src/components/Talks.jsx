@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NewTalkModal from './NewTalkModal';
 import TalkDetailModal from './TalkDetailModal';
 import VibesChart from './VibesChart';
@@ -108,6 +109,7 @@ const Talks = () => {
           <h1>{t('header.navigation.talks')}</h1>
         </div>
         <div className="talks-loading">
+          <FontAwesomeIcon icon="spinner" spin />
           <p>Loading talks...</p>
         </div>
       </div>
@@ -121,6 +123,7 @@ const Talks = () => {
           <h1>{t('header.navigation.talks')}</h1>
         </div>
         <div className="talks-error">
+          <FontAwesomeIcon icon="exclamation-triangle" />
           <p>Error loading talks: {error}</p>
         </div>
       </div>
@@ -140,6 +143,7 @@ const Talks = () => {
           onClick={() => setIsModalOpen(true)}
           disabled={isSubmitting}
         >
+          <FontAwesomeIcon icon="plus" />
           New Talk
         </button>
       </div>

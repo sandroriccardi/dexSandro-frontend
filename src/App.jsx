@@ -6,6 +6,7 @@ import AllTasks from './components/AllTasks';
 import AI from './components/AI';
 import Talks from './components/Talks';
 import Footer from './components/Footer';
+import './config/fontawesome';
 import './App.css';
 
 function App() {

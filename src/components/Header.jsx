@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LanguageSwitcher from './LanguageSwitcher';
 import './Header.css';
 
@@ -21,6 +22,7 @@ const Header = () => {
                 to="/" 
                 className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
               >
+                <FontAwesomeIcon icon="home" className="nav-icon" />
                 {t('header.navigation.home')}
               </Link>
             </li>
@@ -29,6 +31,7 @@ const Header = () => {
                 to="/all-tasks" 
                 className={`nav-link ${location.pathname === '/all-tasks' ? 'active' : ''}`}
               >
+                <FontAwesomeIcon icon="tasks" className="nav-icon" />
                 {t('header.navigation.allTasks')}
               </Link>
             </li>
@@ -37,19 +40,27 @@ const Header = () => {
                 to="/ai" 
                 className={`nav-link ${location.pathname === '/ai' ? 'active' : ''}`}
               >
+                <FontAwesomeIcon icon="robot" className="nav-icon" />
                 {t('header.navigation.ai')}
               </Link>
             </li>
-            <li><a href="#services" className="nav-link">{t('header.navigation.services')}</a></li>
+            <li><a href="#services" className="nav-link">
+              <FontAwesomeIcon icon="cog" className="nav-icon" />
+              {t('header.navigation.services')}
+            </a></li>
             <li>
               <Link 
                 to="/talks" 
                 className={`nav-link ${location.pathname === '/talks' ? 'active' : ''}`}
               >
+                <FontAwesomeIcon icon="comments" className="nav-icon" />
                 {t('header.navigation.talks')}
               </Link>
             </li>
-            <li><a href="#contact" className="nav-link">{t('header.navigation.contact')}</a></li>
+            <li><a href="#contact" className="nav-link">
+              <FontAwesomeIcon icon="envelope" className="nav-icon" />
+              {t('header.navigation.contact')}
+            </a></li>
           </ul>
         </nav>
         <LanguageSwitcher />

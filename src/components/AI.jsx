@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './AI.css';
 import openAIService from '../services/openai.service';
 import Toast from './Toast';
@@ -90,7 +91,17 @@ const AI = () => {
             onClick={handleSubmit}
             disabled={isLoading || !inputText.trim()}
           >
-            {isLoading ? 'Generating Title...' : 'Get AI Title Suggestion'}
+            {isLoading ? (
+              <>
+                <FontAwesomeIcon icon="spinner" spin />
+                Generating Title...
+              </>
+            ) : (
+              <>
+                <FontAwesomeIcon icon="robot" />
+                Get AI Title Suggestion
+              </>
+            )}
           </button>
         </div>
         

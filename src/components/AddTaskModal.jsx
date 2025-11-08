@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './AddTaskModal.css';
 import openAIService from '../services/openai.service';
 
@@ -115,7 +116,17 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
                 disabled={isGeneratingTitle || !description.trim()}
                 title="Generate title based on description"
               >
-                {isGeneratingTitle ? 'Generating...' : '🤖 AI Title'}
+                {isGeneratingTitle ? (
+                  <>
+                    <FontAwesomeIcon icon="spinner" spin />
+                    Generating...
+                  </>
+                ) : (
+                  <>
+                    <FontAwesomeIcon icon="robot" />
+                    AI Title
+                  </>
+                )}
               </button>
             </div>
           </div>
@@ -149,8 +160,14 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
             />
           </div>
           <div className="form-actions">
-            <button type="submit" className="save-button">Save</button>
-            <button type="button" onClick={handleClose} className="cancel-button">Cancel</button>
+            <button type="submit" className="save-button">
+              <FontAwesomeIcon icon="save" />
+              Save
+            </button>
+            <button type="button" onClick={handleClose} className="cancel-button">
+              <FontAwesomeIcon icon="times" />
+              Cancel
+            </button>
           </div>
         </form>
       </div>

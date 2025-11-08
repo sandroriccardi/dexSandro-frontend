@@ -41,12 +41,24 @@
   padding: 0.5rem 1rem;
   border-radius: 5px;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav-link:hover,
 .nav-link.active {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
+}
+
+.nav-icon {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover .nav-icon {
+  transform: scale(1.1);
 }
 
 /* Mobile responsive */

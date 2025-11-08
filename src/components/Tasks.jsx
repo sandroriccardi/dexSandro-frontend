@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Tasks.css';
 import { useTasks } from '../hooks/useTasks';
 import TaskDetailModal from './TaskDetailModal';
@@ -98,7 +99,17 @@ const Tasks = () => {
           className="add-btn"
           disabled={isCreating || !newTask.trim()}
         >
-          {isCreating ? 'Adding...' : 'Add Task'}
+          {isCreating ? (
+            <>
+              <FontAwesomeIcon icon="spinner" spin />
+              Adding...
+            </>
+          ) : (
+            <>
+              <FontAwesomeIcon icon="plus" />
+              Add Task
+            </>
+          )}
         </button>
       </div>
 
@@ -109,6 +120,7 @@ const Tasks = () => {
             padding: '20px',
             color: '#666'
           }}>
+            <FontAwesomeIcon icon="spinner" spin />
             Loading tasks...
           </div>
         ) : tasks.length === 0 ? (
@@ -117,6 +129,7 @@ const Tasks = () => {
             padding: '20px',
             color: '#999'
           }}>
+            <FontAwesomeIcon icon="exclamation-triangle" />
             No tasks found. Add your first task above!
           </div>
         ) : (
