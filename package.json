@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "WATCHPACK_POLLING=true react-scripts start",
     "start:prod": "npm run build && npx serve -s build -p 3000",
     "start:dev": "npm run serve:watch",
     "dev": "npm run test:coverage && react-scripts start",
