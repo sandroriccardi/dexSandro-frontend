@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Tasks.css';
 import { useTasks } from '../hooks/useTasks';
+import TaskDetailModal from './TaskDetailModal';
 
 const Tasks = () => {
   const {
@@ -17,6 +18,8 @@ const Tasks = () => {
   } = useTasks();
 
   const [newTask, setNewTask] = useState('');
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
   const handleAddTask = async () => {
     if (newTask.trim()) {
@@ -33,6 +36,20 @@ const Tasks = () => {
 
   const handleDeleteTask = async (id) => {
     await deleteTask(id);
+  };
+
+  const handleTaskClick = (task, event) => {
+    // Don't open detail modal if clicking on checkbox
+    if (event.target.type === 'checkbox') {
+      return;
+    }
+    setSelectedTask(task);
+    setIsDetailModalOpen(true);
+  };
+
+  const handleCloseDetailModal = () => {
+    setIsDetailModalOpen(false);
+    setSelectedTask(null);
   };
 
   const stats = getTaskStats();
@@ -104,7 +121,12 @@ const Tasks = () => {
           </div>
         ) : (
           tasks.map(task => (
-            <div key={task.id} className={`task-item ${task.isCompleted ? 'completed' : ''}`}>
+            <div 
+              key={task.id} 
+              className={`task-item ${task.isCompleted ? 'completed' : ''} clickable-task`}
+              onClick={(e) => handleTaskClick(task, e)}
+              title="Click to view details"
+            >
               <div className="task-content">
                 <input
                   type="checkbox"
@@ -131,6 +153,12 @@ const Tasks = () => {
       <div className="task-stats">
         <p>Total: {stats.total} | Completed: {stats.completed} | Remaining: {stats.remaining}</p>
       </div>
+
+      <TaskDetailModal
+        isOpen={isDetailModalOpen}
+        onClose={handleCloseDetailModal}
+        task={selectedTask}
+      />
     </div>
   );
 };

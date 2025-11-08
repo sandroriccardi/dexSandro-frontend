@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import { tasksApiService } from '../services';
 import AddTaskModal from './AddTaskModal';
 import EditTaskModal from './EditTaskModal';
@@ -192,7 +193,7 @@ const AllTasks = () => {
                             title={t('modals.editTask.title')}
                             aria-label={`Edit task: ${task.title}`}
                           >
-                            ✏️
+                            <FaEdit />
                           </button>
                           <button
                             className="delete-btn"
@@ -200,7 +201,7 @@ const AllTasks = () => {
                             title={t('buttons.delete')}
                             aria-label={`Delete task: ${task.title}`}
                           >
-                            🗑️
+                            <FaTrash style={{ color: '#dc3545' }} />
                           </button>
                         </td>
                 </tr>

@@ -19,7 +19,7 @@ RUN apk add --no-cache git
 COPY package*.json ./
 
 # Install all dependencies (including dev dependencies)
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy source code
 COPY . .

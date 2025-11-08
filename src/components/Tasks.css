@@ -70,6 +70,16 @@
   transform: translateX(5px);
 }
 
+.task-item.clickable-task {
+  cursor: pointer;
+}
+
+.task-item.clickable-task:hover {
+  background: #d1fae5;
+  transform: translateX(5px) translateY(-1px);
+  box-shadow: 0 4px 12px rgba(75, 162, 118, 0.2);
+}
+
 .task-item.completed {
   background: #e8f5e8;
   border-left-color: #28a745;
